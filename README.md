@@ -58,7 +58,13 @@ mip-es-acidentes/
    pip install -r requirements.txt
    ```
 
-3. Execute os notebooks nesta ordem:
+3. Execute o pipeline automatizado:
+
+   ```bash
+   ./run_pipeline.sh
+   ```
+
+   Alternativamente, execute os notebooks nesta ordem:
    1. `notebooks/01_data_preparation.ipynb`
    2. `notebooks/02_io_model_and_multipliers.ipynb`
    3. `notebooks/03_hypothetical_extraction.ipynb`
