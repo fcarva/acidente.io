@@ -107,7 +107,11 @@ _PROFILE_COLORS: dict[str, str] = {
 _OUTPUT_FIGURE = "outputs/figures/quadrante_risco_es.pdf"
 
 
-def generate_scatter_plot(df: pd.DataFrame) -> None:
+def generate_scatter_plot(
+    df: pd.DataFrame,
+    dpi: int = 300,
+    fmt: str = "pdf",
+) -> None:
     """Generate and save the risk-quadrant scatter plot.
 
     Axes
@@ -122,6 +126,10 @@ def generate_scatter_plot(df: pd.DataFrame) -> None:
     ----------
     df:
         Output of :func:`build_results_dataframe`.
+    dpi:
+        Resolution in dots per inch (default 300).
+    fmt:
+        Output file format (default ``"pdf"``).
     """
     os.makedirs(os.path.dirname(_OUTPUT_FIGURE), exist_ok=True)
 
@@ -173,9 +181,10 @@ def generate_scatter_plot(df: pd.DataFrame) -> None:
     ax.grid(True, linestyle=":", alpha=0.4)
 
     fig.tight_layout()
-    fig.savefig(_OUTPUT_FIGURE, dpi=300, format="pdf")
+    output_path = f"{os.path.splitext(_OUTPUT_FIGURE)[0]}.{fmt}"
+    fig.savefig(output_path, dpi=dpi, format=fmt)
     plt.close(fig)
-    print(f"[DataViz] Figura salva em {_OUTPUT_FIGURE}")
+    print(f"[DataViz] Figura salva em {output_path}")
 
 
 # ---------------------------------------------------------------------------
@@ -183,6 +192,20 @@ def generate_scatter_plot(df: pd.DataFrame) -> None:
 # ---------------------------------------------------------------------------
 
 _OUTPUT_EXCEL = "outputs/tables/tabelas_resultados.xlsx"
+
+
+def _format_pt_decimal(value: float) -> str:
+    """Format a float using Brazilian convention: comma as decimal separator,
+    period as thousands separator (e.g. 1.234,567890).
+
+    Returns empty string for missing values.
+    """
+    if not pd.notna(value):
+        return ""
+    # Build standard English-locale string, then swap separators
+    en_str = f"{value:,.6f}"          # e.g. "1,234.567890"
+    pt_str = en_str.replace(",", "\x00").replace(".", ",").replace("\x00", ".")
+    return pt_str                      # e.g. "1.234,567890"
 
 
 def export_excel(df: pd.DataFrame) -> None:
@@ -210,11 +233,7 @@ def export_excel(df: pd.DataFrame) -> None:
     numeric_cols = ["cat_count", "a", "U_j", "f", "delta_CAT"]
     df_pt = df_sorted.copy()
     for col in numeric_cols:
-        df_pt[col] = df_pt[col].apply(
-            lambda v: f"{v:,.6f}".replace(",", "X").replace(".", ",").replace("X", ".")
-            if pd.notna(v)
-            else ""
-        )
+        df_pt[col] = df_pt[col].apply(_format_pt_decimal)
 
     with pd.ExcelWriter(_OUTPUT_EXCEL, engine="openpyxl") as writer:
         df_sorted.to_excel(writer, sheet_name="Resultados", index=False)

@@ -18,6 +18,17 @@ import numpy as np
 
 
 # ---------------------------------------------------------------------------
+# Shared helper
+# ---------------------------------------------------------------------------
+
+def _safe_divide(numerator: np.ndarray, denominator: np.ndarray) -> np.ndarray:
+    """Element-wise division that replaces inf/nan with 0 (handles zero denominators)."""
+    denom_safe = np.where(denominator == 0, np.nan, denominator)
+    result = numerator / denom_safe
+    return np.nan_to_num(result, nan=0.0, posinf=0.0, neginf=0.0)
+
+
+# ---------------------------------------------------------------------------
 # Subtask 2.1 – Leontief model
 # ---------------------------------------------------------------------------
 
@@ -46,9 +57,8 @@ def leontief_model(
     """
     n = Z.shape[0]
 
-    X_safe = np.where(X == 0, np.nan, X)
-    A = Z / X_safe[np.newaxis, :]  # broadcast: divide each column j by X[j]
-    A = np.nan_to_num(A, nan=0.0, posinf=0.0, neginf=0.0)
+    # Divide each column j of Z by X[j]; _safe_divide handles X[j]==0
+    A = _safe_divide(Z, X[np.newaxis, :])
 
     I = np.eye(n)
     L = np.linalg.inv(I - A)
@@ -86,9 +96,7 @@ def social_extension(
     f : np.ndarray, shape (35,)
         Footprint multiplier (row vector).
     """
-    X_safe = np.where(X == 0, np.nan, X)
-    a = cat_35 / X_safe
-    a = np.nan_to_num(a, nan=0.0, posinf=0.0, neginf=0.0)
+    a = _safe_divide(cat_35, X)
 
     f = a @ L  # row vector times L → row vector
 
