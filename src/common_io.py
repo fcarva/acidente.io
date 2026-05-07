@@ -41,7 +41,9 @@ def _extract_numeric_block(df: pd.DataFrame) -> np.ndarray | None:
     for i in range(max(1, values.shape[0] - N_SETORES + 1)):
         for j in range(max(1, values.shape[1] - N_SETORES + 1)):
             block = values[i : i + N_SETORES, j : j + N_SETORES]
-            if block.shape == (N_SETORES, N_SETORES) and np.isfinite(block).sum() >= int(MIN_VALID_BLOCK_RATIO * block.size):
+            is_shape_valid = block.shape == (N_SETORES, N_SETORES)
+            is_ratio_valid = np.isfinite(block).sum() >= int(MIN_VALID_BLOCK_RATIO * block.size)
+            if is_shape_valid and is_ratio_valid:
                 return np.nan_to_num(block, nan=0.0)
     return None
 

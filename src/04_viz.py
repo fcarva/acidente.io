@@ -11,7 +11,7 @@ OUTPUT_PATH = ROOT / "outputs" / "figures" / "quadrante_risco_es.pdf"
 def main() -> None:
     if not INPUT_PATH.exists() or INPUT_PATH.stat().st_size == 0:
         raise FileNotFoundError(
-            f"Arquivo de resultados não encontrado ou vazio: {INPUT_PATH}. Execute o 02_io_model.py antes."
+            f"Arquivo de resultados não encontrado ou vazio: {INPUT_PATH}. Execute o run_pipeline.sh antes."
         )
 
     df = pd.read_csv(INPUT_PATH)

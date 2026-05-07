@@ -3,8 +3,8 @@ from pathlib import Path
 import numpy as np
 import pandas as pd
 
-N_SETORES = 35
-FALLBACK_SEED = 42
+from common_io import ACCIDENTS_FALLBACK_SEED, N_SETORES
+
 ROOT = Path(__file__).resolve().parents[1]
 RAW_SMARTLAB = ROOT / "data" / "raw" / "smartlab_cat_2015.csv"
 DE_PARA_PATH = ROOT / "data" / "processed" / "de_para_cnae_mip.csv"
@@ -23,7 +23,7 @@ def _read_csv_with_fallback(path: Path) -> pd.DataFrame:
 
 
 def _build_synthetic_vector() -> pd.DataFrame:
-    rng = np.random.default_rng(FALLBACK_SEED)
+    rng = np.random.default_rng(ACCIDENTS_FALLBACK_SEED)
     acidentes = rng.integers(low=80, high=1800, size=N_SETORES)
     return pd.DataFrame({"setor_id": np.arange(1, N_SETORES + 1), "acidentes": acidentes})
 
