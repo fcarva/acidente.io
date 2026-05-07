@@ -1,5 +1,20 @@
+# Python cache and virtual environments
 __pycache__/
 *.py[cod]
 *.egg-info/
 .env
 .venv/
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS/editor files
+.DS_Store
+.vscode/
+
+# Generated outputs
+outputs/tables/*.csv
+outputs/tables/*.tex
+outputs/figures/*.png
+outputs/figures/*.pdf

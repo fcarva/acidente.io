@@ -16,7 +16,7 @@ indireto.  O projeto combina:
 
 - **MIP-ES 2015** (UFES / IJSN): matrizes de consumo intermediário (Z),
   demanda final (Y) e produção bruta (X) com 35 setores.
-- **SmartLab/MTE — CAT 2015**: microdados de acidentes típicos de trabalho
+- **SmartLab/MTE -- CAT 2015**: microdados de acidentes típicos de trabalho
   (Comunicação de Acidente de Trabalho) filtrados para o Espírito Santo.
 
 Os resultados identificam setores-chave de risco, propagadores estruturais e
@@ -30,8 +30,13 @@ sobre o total de acidentes na economia.
 | Arquivo | Fonte | Descrição |
 |---|---|---|
 | `data/raw/MIP_ES_2015.xlsm` | UFES / IJSN | Matrizes Z, Y e X (35 setores, R$ mil, 2015) |
-| `data/raw/smartlab_cat_2015.csv` | SmartLab / MTE | Microdados CAT — acidentes típicos |
+| `data/raw/smartlab_cat_2015.csv` | SmartLab / MTE | Microdados CAT -- acidentes típicos |
 | `data/raw/de_para_cnae_setores.csv` | Elaboração própria | De-para CNAE 2.0 → setores MIP (35) |
+
+Links oficiais:
+- IBGE: <https://www.ibge.gov.br/>
+- IJSN: <https://ijsn.es.gov.br/>
+- SmartLab: <https://smartlabbr.org/>
 
 ---
 
@@ -49,7 +54,7 @@ onde $\hat{X}$ é a matriz diagonal com a produção bruta setorial.
 
 $$L = (I - A)^{-1}$$
 
-### Extensão Social — Acidentes de Trabalho
+### Extensão Social -- Acidentes de Trabalho
 
 **Intensidade direta de acidentes**
 
@@ -89,19 +94,19 @@ $$X^*_k = (I - A^*_k)^{-1} \mathbf{Y}$$
 ```
 Orchestrator (agents/orchestrator.py)
 │
-├── Agente 1 — Data Engineer (agents/data_engineer.py)
+├── Agente 1 -- Data Engineer (agents/data_engineer.py)
 │   ├── 1.1 Extração MIP (Z, Y, X)
 │   ├── 1.2 Ingestão SmartLab CAT
 │   └── 1.3 Compatibilização CNAE → 35 setores
 │   └── [Gate] validate_dimensions()
 │
-├── Agente 2 — IO Specialist (agents/io_specialist.py)
+├── Agente 2 -- IO Specialist (agents/io_specialist.py)
 │   ├── 2.1 Leontief: A, L
 │   ├── 2.2 Extensão social: a, f
 │   ├── 2.3 Rasmussen-Hirschman: U_j
 │   └── 2.4 HEM: delta_CAT
 │
-└── Agente 3 — Data Viz (agents/data_viz.py)
+└── Agente 3 -- Data Viz (agents/data_viz.py)
     ├── 3.1 DataFrame de resultados + quadrantes
     ├── 3.2 Gráfico de dispersão (PDF, 300 dpi)
     └── 3.3 Exportação Excel (3 abas)
