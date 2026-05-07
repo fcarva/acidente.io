@@ -6,6 +6,10 @@ import pandas as pd
 N_SETORES = 35
 ROOT = Path(__file__).resolve().parents[1]
 ACCIDENTS_PATH = ROOT / "data" / "processed" / "vetor_acidentes_35.csv"
+SYNTHETIC_IO_SEED = 2024
+ACCIDENTS_FALLBACK_SEED = 7
+MIN_VALID_BLOCK_RATIO = 0.95
+MIN_VALID_Y_RATIO = 0.8
 
 
 def safe_inverse(matrix: np.ndarray) -> np.ndarray:
@@ -16,7 +20,7 @@ def safe_inverse(matrix: np.ndarray) -> np.ndarray:
 
 
 def synthetic_io_data() -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-    rng = np.random.default_rng(2024)
+    rng = np.random.default_rng(SYNTHETIC_IO_SEED)
     X = rng.uniform(1200, 6500, size=N_SETORES)
     A = rng.uniform(0.003, 0.04, size=(N_SETORES, N_SETORES))
     col_sum = A.sum(axis=0)
@@ -37,7 +41,7 @@ def _extract_numeric_block(df: pd.DataFrame) -> np.ndarray | None:
     for i in range(max(1, values.shape[0] - N_SETORES + 1)):
         for j in range(max(1, values.shape[1] - N_SETORES + 1)):
             block = values[i : i + N_SETORES, j : j + N_SETORES]
-            if block.shape == (N_SETORES, N_SETORES) and np.isfinite(block).sum() >= int(0.95 * block.size):
+            if block.shape == (N_SETORES, N_SETORES) and np.isfinite(block).sum() >= int(MIN_VALID_BLOCK_RATIO * block.size):
                 return np.nan_to_num(block, nan=0.0)
     return None
 
@@ -85,7 +89,7 @@ def load_io_data() -> tuple[np.ndarray, np.ndarray, np.ndarray]:
 
             if values.shape[1] >= N_SETORES + 1:
                 y_candidate = values[:N_SETORES, N_SETORES]
-                if np.isfinite(y_candidate).sum() >= int(0.8 * N_SETORES):
+                if np.isfinite(y_candidate).sum() >= int(MIN_VALID_Y_RATIO * N_SETORES):
                     Y = np.nan_to_num(y_candidate, nan=0.0)
                     X = Z.sum(axis=0) + Y
 
@@ -98,13 +102,13 @@ def load_io_data() -> tuple[np.ndarray, np.ndarray, np.ndarray]:
 
 def load_accidents() -> np.ndarray:
     if not ACCIDENTS_PATH.exists() or ACCIDENTS_PATH.stat().st_size == 0:
-        rng = np.random.default_rng(7)
+        rng = np.random.default_rng(ACCIDENTS_FALLBACK_SEED)
         return rng.uniform(100, 2000, size=N_SETORES)
 
     try:
         df = pd.read_csv(ACCIDENTS_PATH)
     except Exception:
-        rng = np.random.default_rng(7)
+        rng = np.random.default_rng(ACCIDENTS_FALLBACK_SEED)
         return rng.uniform(100, 2000, size=N_SETORES)
 
     cols = {c.lower().strip(): c for c in df.columns}
@@ -114,7 +118,7 @@ def load_accidents() -> np.ndarray:
     if acc_col is None:
         numeric_cols = df.select_dtypes(include=["number"]).columns.tolist()
         if not numeric_cols:
-            rng = np.random.default_rng(7)
+            rng = np.random.default_rng(ACCIDENTS_FALLBACK_SEED)
             return rng.uniform(100, 2000, size=N_SETORES)
         acc_col = numeric_cols[-1]
 
