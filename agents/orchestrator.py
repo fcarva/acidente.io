@@ -77,7 +77,7 @@ def run_pipeline(
     # ------------------------------------------------------------------
     # Stage 1: Data Engineer
     # ------------------------------------------------------------------
-    print("[Orchestrator] Etapa 1 — Data Engineer")
+    print("[Orchestrator] Etapa 1 -- Data Engineer")
 
     print("  1.1 Extraindo matrizes MIP …")
     Z, Y, X = extract_mip(mip_path)
@@ -95,7 +95,7 @@ def run_pipeline(
     # ------------------------------------------------------------------
     # Stage 2: IO Specialist
     # ------------------------------------------------------------------
-    print("[Orchestrator] Etapa 2 — IO Specialist")
+    print("[Orchestrator] Etapa 2 -- IO Specialist")
 
     print("  2.1 Calculando matriz A e inversa de Leontief L …")
     A, L = leontief_model(Z, X)
@@ -112,7 +112,7 @@ def run_pipeline(
     # ------------------------------------------------------------------
     # Stage 3: Data Viz
     # ------------------------------------------------------------------
-    print("[Orchestrator] Etapa 3 — Data Viz")
+    print("[Orchestrator] Etapa 3 -- Data Viz")
 
     print("  3.1 Construindo DataFrame de resultados e classificando perfis …")
     df = build_results_dataframe(cat_35, a, U_j, f, delta_CAT, sector_names)

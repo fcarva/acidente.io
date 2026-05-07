@@ -204,7 +204,9 @@ def _format_pt_decimal(value: float) -> str:
         return ""
     # Build standard English-locale string, then swap separators
     en_str = f"{value:,.6f}"          # e.g. "1,234.567890"
-    pt_str = en_str.replace(",", "\x00").replace(".", ",").replace("\x00", ".")
+    # Split on '.' to isolate integer and decimal parts, then rejoin
+    integer_part, decimal_part = en_str.split(".")
+    pt_str = integer_part.replace(",", ".") + "," + decimal_part
     return pt_str                      # e.g. "1.234,567890"
 
 
