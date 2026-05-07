@@ -62,7 +62,7 @@ def main() -> None:
         grouped = (
             raw_df[[sector_col, acc_col]]
             .dropna()
-            .assign(**{acc_col: pd.to_numeric(raw_df[acc_col], errors="coerce")})
+            .assign(**{acc_col: lambda d: pd.to_numeric(d[acc_col], errors="coerce")})
             .dropna()
             .groupby(sector_col, as_index=False)[acc_col]
             .sum()

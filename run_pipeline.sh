@@ -5,6 +5,10 @@ PYTHON_BIN="${PYTHON_BIN:-python3}"
 if ! command -v "$PYTHON_BIN" >/dev/null 2>&1; then
   PYTHON_BIN="python"
 fi
+if ! command -v "$PYTHON_BIN" >/dev/null 2>&1; then
+  echo "Erro: nenhum interpretador Python disponível (python3/python)." >&2
+  exit 1
+fi
 
 echo "[1/4] Preparando dados de acidentes..."
 "$PYTHON_BIN" src/01_data_prep.py

@@ -7,6 +7,7 @@ from common_io import N_SETORES, load_accidents, load_io_data, safe_inverse
 
 ROOT = Path(__file__).resolve().parents[1]
 OUTPUT_TABLE = ROOT / "outputs" / "tables" / "resultados_principais.csv"
+MIN_PRODUCTION_THRESHOLD = 1e-9
 
 
 def main() -> None:
@@ -15,7 +16,7 @@ def main() -> None:
     Z, Y, X = load_io_data()
     CAT = load_accidents()
 
-    X_safe = np.where(X <= 0, 1e-9, X)
+    X_safe = np.where(X <= 0, MIN_PRODUCTION_THRESHOLD, X)
     A = Z / X_safe[np.newaxis, :]
     I = np.eye(N_SETORES)
     L = safe_inverse(I - A)

@@ -10,6 +10,8 @@ SYNTHETIC_IO_SEED = 2024
 ACCIDENTS_FALLBACK_SEED = 7
 MIN_VALID_BLOCK_RATIO = 0.95
 MIN_VALID_Y_RATIO = 0.8
+FINAL_DEMAND_RATIO = 0.4
+MIN_FINAL_DEMAND = 1.0
 
 
 def safe_inverse(matrix: np.ndarray) -> np.ndarray:
@@ -85,7 +87,7 @@ def load_io_data() -> tuple[np.ndarray, np.ndarray, np.ndarray]:
 
             values = df.apply(pd.to_numeric, errors="coerce").to_numpy(dtype=float)
             x_from_z = Z.sum(axis=0)
-            y_from_residual = np.maximum(1.0, 0.4 * x_from_z)
+            y_from_residual = np.maximum(MIN_FINAL_DEMAND, FINAL_DEMAND_RATIO * x_from_z)
             X = x_from_z + y_from_residual
             Y = y_from_residual
 
