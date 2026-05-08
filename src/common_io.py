@@ -100,7 +100,36 @@ def _candidate_excel_files() -> list[Path]:
     return ordered
 
 
-def _load_Z_from_xlsx() -> np.ndarray | None:
+def _load_AL_from_ijsn_xlsx() -> tuple[np.ndarray, np.ndarray] | None:
+    """Lê A e L diretamente das Tabelas 11 e 12 do XLSX oficial IJSN.
+
+    Layout esperado: cabeçalhos nas linhas 0-4, dados nas linhas 5-39
+    (35 setores), colunas 2-36 (35 atividades). Aba "11" = matriz A
+    (D.Bn), aba "12" = matriz L (Leontief).
+    """
+    for excel_path in _candidate_excel_files():
+        try:
+            xls = pd.ExcelFile(excel_path)
+        except Exception:
+            continue
+        if "11" not in xls.sheet_names or "12" not in xls.sheet_names:
+            continue
+        try:
+            A = pd.read_excel(excel_path, sheet_name="11", header=None).iloc[
+                5 : 5 + N_SETORES, 2 : 2 + N_SETORES
+            ].to_numpy(dtype=float)
+            L = pd.read_excel(excel_path, sheet_name="12", header=None).iloc[
+                5 : 5 + N_SETORES, 2 : 2 + N_SETORES
+            ].to_numpy(dtype=float)
+        except Exception:
+            continue
+        if A.shape == (N_SETORES, N_SETORES) and L.shape == (N_SETORES, N_SETORES):
+            return A, L
+    return None
+
+
+def _load_Z_from_xlsx_legacy() -> np.ndarray | None:
+    """Fallback heurístico para XLSX sem aba '11'/'12' nomeadas."""
     for excel_path in _candidate_excel_files():
         try:
             xls = pd.ExcelFile(excel_path)
@@ -119,7 +148,7 @@ def _load_Z_from_xlsx() -> np.ndarray | None:
                         continue
                     if np.isfinite(block).sum() < int(0.95 * block.size):
                         continue
-                    if np.diag(block).max() > 1.5:  # heurística: matriz Z não-Leontief
+                    if np.diag(block).max() > 1.5:  # heurística: não-Leontief
                         continue
                     return np.nan_to_num(block, nan=0.0)
     return None
@@ -145,6 +174,13 @@ def load_io_data() -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.n
     X = sectors["vbp_milhoes_RS"].to_numpy(dtype=float)
     I = np.eye(N_SETORES)
 
+    pair = _load_AL_from_ijsn_xlsx()
+    if pair is not None:
+        A, L = pair
+        Z = A * X[np.newaxis, :]
+        Y = np.maximum(X - Z.sum(axis=0), 0.0)
+        return Z, A, L, X, Y, sectors, "xlsx_ijsn_oficial_tab11_tab12"
+
     L = _load_matrix_from_csv(L_CSV_PATH)
     if L is not None:
         A = I - safe_inverse(L)
@@ -153,13 +189,13 @@ def load_io_data() -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.n
         Y = np.maximum(X - Z.sum(axis=0), 0.0)
         return Z, A, L, X, Y, sectors, "csv_L_oficial_ijsn"
 
-    Z = _load_Z_from_xlsx()
+    Z = _load_Z_from_xlsx_legacy()
     if Z is not None:
         X_safe = np.where(X <= 0, MIN_PRODUCTION_THRESHOLD, X)
         A = Z / X_safe[np.newaxis, :]
         L = safe_inverse(I - A)
         Y = np.maximum(X - Z.sum(axis=0), 0.0)
-        return Z, A, L, X, Y, sectors, "xlsx_ijsn_oficial"
+        return Z, A, L, X, Y, sectors, "xlsx_legacy"
 
     Z = _load_matrix_from_csv(Z_CSV_PATH)
     if Z is not None:

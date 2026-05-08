@@ -11,7 +11,7 @@ Ministério do Trabalho/Previdência.
 
 | Dimensão | Status | Notas |
 |---|---|---|
-| MIP-ES 2015 (Z, A, L) | **OK** | L oficial IJSN; ‖(I−A)L − I‖_F = 1.56e-15 |
+| MIP-ES 2015 (Z, A, L) | **OK** | XLSX oficial IJSN (Tabelas 11+12); ‖(I−A)L − I‖_F = 2.06e-15 |
 | Vetor satélite CAT | **OK com caveats** | AEAT-2015 oficial; 92 entradas no de-para; cobertura 100% das CNAEs presentes |
 | Modelo de Leontief aberto (f' = a'L) | **OK** | Implementado, validado |
 | Rasmussen-Hirschman backward | **OK** | U_j = média coluna L / média global L |
@@ -179,29 +179,38 @@ CAT_2015 = 0 no AEAT-ES. Lei 8.213/91 obriga mas fiscalização é nula.
 Estimativas RAIS-2015: ~114 mil domésticos no ES. Risco real provavelmente
 não-zero. **Limitação severa.**
 
-### 4.4 Discrepância MIP-ES TD-60 reconstruída vs L oficial IJSN
+### 4.4 Discrepância MIP-ES TD-60 reconstruída vs L oficial IJSN — RESOLVIDA
 
-Em uma célula de A o erro de transcrição do PDF chega a 0.67. Mean |ΔA| =
-2.8e-3. Mantemos a L oficial como fonte primária; a Z reconstruída fica
-como fallback documentado. **Idealmente, baixar a `Matriz_Insumo-Produto_MIP_35x35.xlsx`
-diretamente do IJSN** (depende de allowlist).
+Em uma célula de A o erro de transcrição do PDF chegava a 0.67 (mean |ΔA|
+= 2.8e-3). **Resolvido** em 2026-05-08 com a integração direta do XLSX
+oficial IJSN (`Matriz_Insumo-Produto_MIP_35x35.xlsx`) como fonte primária.
+O pipeline agora lê A e L diretamente das Tabelas 11 e 12 do XLSX
+(`xlsx_ijsn_oficial_tab11_tab12`); a L-csv processada e a Z-TD60
+reconstruída ficam como fallbacks ordenados.
+
+A diferença entre L_xlsx e L_csv é 4.99e-12 (precisão de ponto flutuante),
+confirmando que o CSV anteriormente fornecido é faithful. A Z reconstruída
+do TD-60 PDF, por outro lado, mantém-se inadequada como fonte primária.
 
 ---
 
 ## 5. Plano de fechamento (priorizado)
 
-### Iteração imediata (este commit)
+### Iteração imediata (concluída em 2026-05-08)
 
-1. **Multiplicador de emprego** + taxa CAT/trabalhador (`ã_j`).
-2. **Análise de sensibilidade Monte Carlo** sobre `a_j`.
-3. **Tabela final** com a + ã + f + f̃ + U + m + quadrante.
+1. ✅ **Multiplicador de emprego** + taxa CAT/trabalhador (`ã_j`).
+2. ✅ **Análise de sensibilidade Monte Carlo** sobre `a_j`.
+3. ✅ **Tabela final** com a + ã + f + f̃ + U + m + quadrante.
+4. ✅ **XLSX oficial IJSN** integrado como fonte primária de A e L.
 
 ### Próxima iteração (paper)
 
-4. **Modelo fechado Type II** assim que tivermos a coluna de consumo
-   familiar do TRU/MIP-ES (depende do XLSX oficial).
-5. **Campo de influência F_ij** (matriz 35×35 + top-10 pares críticos).
-6. **Validação cruzada SmartLab vs AEAT** para os top-10 setores.
+5. **Modelo fechado Type II** — agora desbloqueado: a Tabela 02 do XLSX
+   oficial tem a coluna 42 (Consumo das famílias) por produto. Aggregação
+   produto→setor via Tabela 10 (D) ou via prefixo de código (sector =
+   primeiros 4 dígitos do código de produto 5-dig).
+6. **Campo de influência F_ij** (matriz 35×35 + top-10 pares críticos).
+7. **Validação cruzada SmartLab vs AEAT** para os top-10 setores.
 
 ### Extensão acadêmica (ANPEC/ENABER)
 
