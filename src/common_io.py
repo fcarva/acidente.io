@@ -2,19 +2,23 @@
 Carregamento centralizado dos artefatos da MIP-ES 2015.
 
 Fonte primária:
-    IJSN — Texto para Discussão nº 60: "Tabela de Recursos e Usos e
-    Matriz de Insumo-Produto do Espírito Santo, 2015".
-    https://ijsn.es.gov.br/publicacoes/textos-para-discussao/td-60-...
+    IJSN — Texto para Discussão nº 60 / Dados Abertos ES.
+    Arquivo "Matriz_Insumo-Produto_MIP.xlsx" (35 setores).
 
-Hierarquia de carregamento de Z, X, Y:
-    1. data/raw/Matriz_Insumo-Produto_MIP_35x35.xlsx (XLSX oficial IJSN)
-    2. data/processed/mip_es_Z.csv  +  mip_es_setores.csv (Z extraída do TD-60)
-    3. fallback sintético reprodutível (apenas para smoke-test)
+Hierarquia de carregamento (mais consolidado primeiro):
+    1. data/processed/mip_es_L.csv             ← L oficial IJSN (publicada)
+    2. data/raw/Matriz_Insumo-Produto_MIP*.xlsx ← XLSX oficial IJSN
+    3. data/processed/mip_es_Z.csv             ← Z reconstruída do TD-60
+    4. fallback sintético reprodutível
 
-Hierarquia do vetor satélite a (CATs/VBP):
-    1. data/processed/vetor_acidentes_35.csv (gerado por 01_data_prep.py)
-    2. data/processed/cats_es_proxy.csv (proxy AEAT-2015 calibrada — ZIP TD-60)
-    3. fallback sintético reprodutível
+Vetor satélite (CATs):
+    1. data/processed/vetor_acidentes_35.csv   ← gerado por 01_data_prep
+    2. data/processed/cats_es_proxy.csv        ← proxy do TD-60
+    3. fallback sintético
+
+A = I − L^{-1}   quando L é a fonte primária
+A = Z · diag(X)^{-1}  quando Z é a fonte primária
+Z = A · diag(X)  é sempre derivável internamente para HEM.
 """
 
 from __future__ import annotations
@@ -31,7 +35,9 @@ DATA_RAW = ROOT / "data" / "raw"
 DATA_PROC = ROOT / "data" / "processed"
 
 SETORES_PATH = DATA_PROC / "mip_es_setores.csv"
+L_CSV_PATH = DATA_PROC / "mip_es_L.csv"
 Z_CSV_PATH = DATA_PROC / "mip_es_Z.csv"
+A_CSV_PATH = DATA_PROC / "mip_es_A.csv"
 CATS_PROXY_PATH = DATA_PROC / "cats_es_proxy.csv"
 ACCIDENTS_PATH = DATA_PROC / "vetor_acidentes_35.csv"
 
@@ -67,10 +73,10 @@ def _synthetic_sectors() -> pd.DataFrame:
     )
 
 
-def _load_z_from_csv() -> np.ndarray | None:
-    if not Z_CSV_PATH.exists() or Z_CSV_PATH.stat().st_size == 0:
+def _load_matrix_from_csv(path: Path) -> np.ndarray | None:
+    if not path.exists() or path.stat().st_size == 0:
         return None
-    df = pd.read_csv(Z_CSV_PATH, index_col=0)
+    df = pd.read_csv(path, index_col=0)
     if df.shape != (N_SETORES, N_SETORES):
         return None
     return df.to_numpy(dtype=float)
@@ -81,6 +87,7 @@ def _candidate_excel_files() -> list[Path]:
         return []
     preferred = [
         DATA_RAW / "Matriz_Insumo-Produto_MIP_35x35.xlsx",
+        DATA_RAW / "Matriz_Insumo-Produto_MIP.xlsx",
         DATA_RAW / "MIP_ES_2015.xlsm",
     ]
     discovered = sorted(DATA_RAW.glob("*.xlsx")) + sorted(DATA_RAW.glob("*.xlsm"))
@@ -93,7 +100,7 @@ def _candidate_excel_files() -> list[Path]:
     return ordered
 
 
-def _load_z_from_xlsx() -> np.ndarray | None:
+def _load_Z_from_xlsx() -> np.ndarray | None:
     for excel_path in _candidate_excel_files():
         try:
             xls = pd.ExcelFile(excel_path)
@@ -112,11 +119,13 @@ def _load_z_from_xlsx() -> np.ndarray | None:
                         continue
                     if np.isfinite(block).sum() < int(0.95 * block.size):
                         continue
+                    if np.diag(block).max() > 1.5:  # heurística: matriz Z não-Leontief
+                        continue
                     return np.nan_to_num(block, nan=0.0)
     return None
 
 
-def _synthetic_io_data() -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+def _synthetic_io_data() -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray]:
     rng = np.random.default_rng(SYNTHETIC_IO_SEED)
     X = rng.uniform(1200.0, 6500.0, size=N_SETORES)
     A = rng.uniform(0.003, 0.04, size=(N_SETORES, N_SETORES))
@@ -126,28 +135,43 @@ def _synthetic_io_data() -> tuple[np.ndarray, np.ndarray, np.ndarray]:
     Z = A * X[np.newaxis, :]
     Y = X - Z.sum(axis=0)
     Y = np.where(Y <= 0, np.maximum(1.0, 0.1 * X), Y)
-    return Z, Y, X
+    L = safe_inverse(np.eye(N_SETORES) - A)
+    return Z, A, L, X
 
 
-def load_io_data() -> tuple[np.ndarray, np.ndarray, np.ndarray, pd.DataFrame, str]:
-    """Retorna Z, Y, X, df_setores e a etiqueta da fonte usada."""
+def load_io_data() -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.ndarray, pd.DataFrame, str]:
+    """Retorna (Z, A, L, X, Y, sectors, source)."""
     sectors = load_sectors()
-    Z = _load_z_from_xlsx()
+    X = sectors["vbp_milhoes_RS"].to_numpy(dtype=float)
+    I = np.eye(N_SETORES)
+
+    L = _load_matrix_from_csv(L_CSV_PATH)
+    if L is not None:
+        A = I - safe_inverse(L)
+        A = np.clip(A, 0.0, None)
+        Z = A * X[np.newaxis, :]
+        Y = np.maximum(X - Z.sum(axis=0), 0.0)
+        return Z, A, L, X, Y, sectors, "csv_L_oficial_ijsn"
+
+    Z = _load_Z_from_xlsx()
     if Z is not None:
-        X = sectors["vbp_milhoes_RS"].to_numpy(dtype=float)
-        Y = X - Z.sum(axis=0)
-        Y = np.maximum(Y, 0.0)
-        return Z, Y, X, sectors, "xlsx_ijsn_oficial"
+        X_safe = np.where(X <= 0, MIN_PRODUCTION_THRESHOLD, X)
+        A = Z / X_safe[np.newaxis, :]
+        L = safe_inverse(I - A)
+        Y = np.maximum(X - Z.sum(axis=0), 0.0)
+        return Z, A, L, X, Y, sectors, "xlsx_ijsn_oficial"
 
-    Z = _load_z_from_csv()
-    if Z is not None and len(sectors) == N_SETORES:
-        X = sectors["vbp_milhoes_RS"].to_numpy(dtype=float)
-        Y = X - Z.sum(axis=0)
-        Y = np.maximum(Y, 0.0)
-        return Z, Y, X, sectors, "csv_processed_td60"
+    Z = _load_matrix_from_csv(Z_CSV_PATH)
+    if Z is not None:
+        X_safe = np.where(X <= 0, MIN_PRODUCTION_THRESHOLD, X)
+        A = Z / X_safe[np.newaxis, :]
+        L = safe_inverse(I - A)
+        Y = np.maximum(X - Z.sum(axis=0), 0.0)
+        return Z, A, L, X, Y, sectors, "csv_Z_td60_reconstruida"
 
-    Z, Y, X = _synthetic_io_data()
-    return Z, Y, X, _synthetic_sectors(), "synthetic_fallback"
+    Z, A, L, X = _synthetic_io_data()
+    Y = np.maximum(X - Z.sum(axis=0), 0.0)
+    return Z, A, L, X, Y, _synthetic_sectors(), "synthetic_fallback"
 
 
 def _load_accidents_from_processed() -> np.ndarray | None:
