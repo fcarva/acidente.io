@@ -1,0 +1,95 @@
+cnae,codigo,nome_setor,peso
+011,0191,"Agricultura, inclusive o apoio à agricultura e a pós-colheita",1.0
+012,0191,"Agricultura, inclusive o apoio à agricultura e a pós-colheita",1.0
+013,0191,"Agricultura, inclusive o apoio à agricultura e a pós-colheita",1.0
+014,0192,"Pecuária, inclusive o apoio à pecuária",1.0
+015,0192,"Pecuária, inclusive o apoio à pecuária",1.0
+016,0191,"Agricultura, inclusive o apoio à agricultura e a pós-colheita",1.0
+017,0191,"Agricultura, inclusive o apoio à agricultura e a pós-colheita",1.0
+02,0280,Produção florestal; pesca e aquicultura,1.0
+03,0280,Produção florestal; pesca e aquicultura,1.0
+05,0580,Extração de carvão mineral e de minerais não-metálicos e metálicos não ferrosos,1.0
+06,0680,"Extração de petróleo e gás, inclusive as atividades de apoio",1.0
+07,0791,"Extração de minério de ferro, inclusive beneficiamentos e a aglomeração",1.0
+08,0580,Extração de carvão mineral e de minerais não-metálicos e metálicos não ferrosos,1.0
+09,0680,"Extração de petróleo e gás, inclusive as atividades de apoio",1.0
+10,1000,Alimentos e bebidas,1.0
+11,1000,Alimentos e bebidas,1.0
+12,1000,Alimentos e bebidas,1.0
+13,1300,"Fabricação de produtos têxteis, artefatos do vestuário, couro e calçados",1.0
+14,1300,"Fabricação de produtos têxteis, artefatos do vestuário, couro e calçados",1.0
+15,1300,"Fabricação de produtos têxteis, artefatos do vestuário, couro e calçados",1.0
+16,1600,"Fabricação de produtos da madeira, móveis e indústrias diversas",1.0
+17,1700,"Fabricação de celulose, papel e produtos de papel",1.0
+18,1700,"Fabricação de celulose, papel e produtos de papel",1.0
+19,1900,"Refino de petróleo, coquerias e fabricação de biocombustíveis",1.0
+20,2000,"Fabricação de químicos, borracha e de material plástico",1.0
+21,2000,"Fabricação de químicos, borracha e de material plástico",1.0
+22,2000,"Fabricação de químicos, borracha e de material plástico",1.0
+23,2300,Fabricação de produtos de minerais não-metálicos,1.0
+24,2400,Metalurgia,1.0
+25,2500,"Fabricação de produtos de metal, máquinas e equipamentos",1.0
+26,2500,"Fabricação de produtos de metal, máquinas e equipamentos",1.0
+27,2500,"Fabricação de produtos de metal, máquinas e equipamentos",1.0
+28,2500,"Fabricação de produtos de metal, máquinas e equipamentos",1.0
+29,2900,"Fabricação de automóveis, caminhões, peças e outros equipamentos de transporte",1.0
+30,2900,"Fabricação de automóveis, caminhões, peças e outros equipamentos de transporte",1.0
+31,1600,"Fabricação de produtos da madeira, móveis e indústrias diversas",1.0
+32,1600,"Fabricação de produtos da madeira, móveis e indústrias diversas",1.0
+33,1600,"Fabricação de produtos da madeira, móveis e indústrias diversas",1.0
+35,3500,"Geração e distribuição de eletricidade e gás, água, esgoto e limpeza urbana",1.0
+36,3500,"Geração e distribuição de eletricidade e gás, água, esgoto e limpeza urbana",1.0
+37,3500,"Geração e distribuição de eletricidade e gás, água, esgoto e limpeza urbana",1.0
+38,3500,"Geração e distribuição de eletricidade e gás, água, esgoto e limpeza urbana",1.0
+39,3500,"Geração e distribuição de eletricidade e gás, água, esgoto e limpeza urbana",1.0
+41,4180,Construção,1.0
+42,4180,Construção,1.0
+43,4180,Construção,1.0
+45,4500,Comércio por atacado e a varejo,1.0
+46,4500,Comércio por atacado e a varejo,1.0
+47,4500,Comércio por atacado e a varejo,1.0
+49,4900,Transporte,1.0
+50,4900,Transporte,1.0
+51,4900,Transporte,1.0
+52,5280,"Armazenamento, atividades auxiliares dos transportes e correio",1.0
+53,5280,"Armazenamento, atividades auxiliares dos transportes e correio",1.0
+55,5500,Alojamento e alimentação,1.0
+56,5500,Alojamento e alimentação,1.0
+58,5800,Serviço de informação,1.0
+59,5800,Serviço de informação,1.0
+60,5800,Serviço de informação,1.0
+61,5800,Serviço de informação,1.0
+62,5800,Serviço de informação,1.0
+63,5800,Serviço de informação,1.0
+64,6480,"Intermediação financeira, seguros e previdência complementar",1.0
+65,6480,"Intermediação financeira, seguros e previdência complementar",1.0
+66,6480,"Intermediação financeira, seguros e previdência complementar",1.0
+68,6800,Atividades imobiliárias,1.0
+69,6900,"Atividades profissionais, científicas e técnicas",1.0
+70,6900,"Atividades profissionais, científicas e técnicas",1.0
+71,6900,"Atividades profissionais, científicas e técnicas",1.0
+72,6900,"Atividades profissionais, científicas e técnicas",1.0
+73,6900,"Atividades profissionais, científicas e técnicas",1.0
+74,6900,"Atividades profissionais, científicas e técnicas",1.0
+75,6900,"Atividades profissionais, científicas e técnicas",1.0
+77,7800,Atividades administrativas e serviços complementares,1.0
+78,7800,Atividades administrativas e serviços complementares,1.0
+79,7800,Atividades administrativas e serviços complementares,1.0
+80,7800,Atividades administrativas e serviços complementares,1.0
+81,7800,Atividades administrativas e serviços complementares,1.0
+82,7800,Atividades administrativas e serviços complementares,1.0
+84,8400,Administração Pública,1.0
+85,8592,Educação privada,1.0
+86,8692,Saúde privada,1.0
+87,8692,Saúde privada,1.0
+88,8692,Saúde privada,1.0
+90,9080,"Atividades artísticas, criativas e de espetáculos",1.0
+91,9080,"Atividades artísticas, criativas e de espetáculos",1.0
+92,9080,"Atividades artísticas, criativas e de espetáculos",1.0
+93,9080,"Atividades artísticas, criativas e de espetáculos",1.0
+94,9480,Organizações associativas e outros serviços pessoais,1.0
+95,9480,Organizações associativas e outros serviços pessoais,1.0
+96,9480,Organizações associativas e outros serviços pessoais,1.0
+97,9700,Serviços domésticos,1.0
+98,9700,Serviços domésticos,1.0
+99,9700,Serviços domésticos,1.0
