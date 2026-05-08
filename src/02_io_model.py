@@ -72,6 +72,13 @@ def main() -> None:
     U_forward = L.sum(axis=1) / N_SETORES / L_grand_mean
     m_producao = L.sum(axis=0)                       # multiplicador de produção
 
+    # Multiplicador de emprego (Type I) e taxa CAT por trabalhador
+    ocupacoes = sectors["ocupacoes"].to_numpy(dtype=float)
+    e = ocupacoes / X_safe                           # coeficiente direto de emprego
+    m_emprego = e @ L                                # multiplicador de emprego (Type I)
+    a_per_trab = np.where(ocupacoes > 0, CAT / np.where(ocupacoes > 0, ocupacoes, 1.0), 0.0)
+    f_per_trab = a_per_trab @ L                      # pegada por trabalhador exposto
+
     a_med = float(np.mean(a))
     U_med = float(np.mean(U_backward))
 
@@ -96,6 +103,10 @@ def main() -> None:
     df["encadeamento_tras_U"] = U_backward
     df["encadeamento_frente_Uf"] = U_forward
     df["multiplicador_producao_m"] = m_producao
+    df["intensidade_per_trab_a_tilde"] = a_per_trab
+    df["pegada_per_trab_f_tilde"] = f_per_trab
+    df["coef_emprego_e"] = e
+    df["multiplicador_emprego_me"] = m_emprego
     df["quadrante"] = [
         _quadrante(a[i], U_backward[i]) for i in range(N_SETORES)
     ]
