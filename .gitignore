@@ -18,3 +18,10 @@ outputs/tables/*.csv
 outputs/tables/*.tex
 outputs/figures/*.png
 outputs/figures/*.pdf
+
+# Fontes brutas pesadas (use scripts/00_extract_aeat.py para regenerar)
+data/raw/aeat15tab/
+data/raw/*.zip
+data/raw/*.xlsm
+data/raw/*.xlsx
+data/raw/*.xls
