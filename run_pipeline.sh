@@ -24,10 +24,13 @@ echo "[2/4] Calculando modelo insumo-produto e indicadores principais..."
 echo "[3/4] Executando extração hipotética (HEM)..."
 "$PYTHON_BIN" src/03_hem_analysis.py
 
-echo "[4/5] Gerando visualização em quadrantes..."
+echo "[4/6] Gerando visualização em quadrantes..."
 "$PYTHON_BIN" src/04_viz.py
 
-echo "[5/5] Análise de sensibilidade Monte Carlo..."
+echo "[5/6] Análise de sensibilidade Monte Carlo..."
 "$PYTHON_BIN" src/05_sensibilidade.py
+
+echo "[6/6] Gerando artigo LaTeX (latex/pegada_acidentes_es.tex)..."
+"$PYTHON_BIN" src/06_article_builder.py
 
 echo "Pipeline concluído com sucesso."
