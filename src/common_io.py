@@ -210,6 +210,100 @@ def load_io_data() -> tuple[np.ndarray, np.ndarray, np.ndarray, np.ndarray, np.n
     return Z, A, L, X, Y, _synthetic_sectors(), "synthetic_fallback"
 
 
+Y_COMPONENTS_PATH = DATA_PROC / "y_components_by_sector.csv"
+
+# Mapeamento posicional: cols 39..45 da Tabela 03 (XLSX IJSN, "Oferta e
+# demanda de produtos DOMÉSTICOS"). T03 tem coluna extra "Valor da produção"
+# na posição 2, deslocando a primeira atividade para a coluna 3 e os
+# componentes de demanda final para cols 39..45.
+Y_COMPONENT_COLS = [
+    ("exp_exterior", 39),
+    ("exp_brasil", 40),
+    ("gov", 41),
+    ("isflsf", 42),
+    ("h_familias", 43),
+    ("fbkf", 44),
+    ("var_estoque", 45),
+]
+
+
+def _aggregate_products_to_sectors(
+    df_demand: pd.DataFrame, D: np.ndarray, prod_codes_d: list[str]
+) -> dict[str, np.ndarray]:
+    """Para cada coluna de demanda em Tabela 03 (DOMÉSTICOS), retorna
+    h_setor = D · h_produto.
+
+    Tabela 03 tem produtos nas linhas 5..85 (nível 81). Tabela 10 tem
+    81 produtos nas colunas; alguns códigos diferem por 1 dígito (55000
+    vs 55001). Alinhamos por prefixo de 4 dígitos.
+    """
+    rows = df_demand.iloc[5 : 5 + 81].copy()
+    rows.columns = list(range(df_demand.shape[1]))
+    prod_codes_t = rows[0].astype(str).str.strip().tolist()
+
+    idx_t = []
+    for c in prod_codes_d:
+        if c in prod_codes_t:
+            idx_t.append(prod_codes_t.index(c))
+        else:
+            base = c[:4]
+            matches = [i for i, p in enumerate(prod_codes_t) if p[:4] == base]
+            idx_t.append(matches[0] if matches else -1)
+
+    out: dict[str, np.ndarray] = {}
+    for name, col in Y_COMPONENT_COLS:
+        h_prod = np.zeros(len(prod_codes_d))
+        for k, ti in enumerate(idx_t):
+            if ti < 0:
+                continue
+            v = pd.to_numeric(rows.iloc[ti, col], errors="coerce")
+            if pd.notna(v):
+                h_prod[k] = float(v)
+        out[name] = D @ h_prod
+    return out
+
+
+def load_y_components() -> pd.DataFrame | None:
+    """Componentes de demanda final por setor (h, FBKF, gov, ISFLSF, exp).
+
+    Cache automática em data/processed/y_components_by_sector.csv após
+    a primeira extração do XLSX oficial.
+    """
+    if Y_COMPONENTS_PATH.exists() and Y_COMPONENTS_PATH.stat().st_size > 0:
+        return pd.read_csv(Y_COMPONENTS_PATH, dtype={"codigo": str})
+
+    sectors = load_sectors()
+    for excel_path in _candidate_excel_files():
+        try:
+            xls = pd.ExcelFile(excel_path)
+        except Exception:
+            continue
+        if "03" not in xls.sheet_names or "10" not in xls.sheet_names:
+            continue
+
+        df03 = pd.read_excel(excel_path, sheet_name="03", header=None)
+        df10 = pd.read_excel(excel_path, sheet_name="10", header=None)
+
+        # D matrix: rows 5..39 (35 sectors), cols 2..82 (81 products).
+        D = df10.iloc[5:5 + N_SETORES, 2 : 2 + 81].to_numpy(dtype=float)
+        prod_codes_d = []
+        hdr = df10.iloc[3].fillna("").astype(str).tolist()
+        for i in range(2, 2 + 81):
+            tok = hdr[i].strip().split(maxsplit=1)
+            prod_codes_d.append(tok[0] if tok else "")
+
+        components = _aggregate_products_to_sectors(df03, D, prod_codes_d)
+
+        out = sectors[["codigo", "nome"]].copy()
+        for name, _ in Y_COMPONENT_COLS:
+            out[name] = components[name]
+        out["y_total"] = sum(out[name] for name, _ in Y_COMPONENT_COLS)
+        Y_COMPONENTS_PATH.parent.mkdir(parents=True, exist_ok=True)
+        out.to_csv(Y_COMPONENTS_PATH, index=False)
+        return out
+    return None
+
+
 def _load_accidents_from_processed() -> np.ndarray | None:
     if ACCIDENTS_PATH.exists() and ACCIDENTS_PATH.stat().st_size > 0:
         df = pd.read_csv(ACCIDENTS_PATH, dtype={"codigo": str})

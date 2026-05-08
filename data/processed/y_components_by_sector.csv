@@ -1,0 +1,36 @@
+codigo,nome,exp_exterior,exp_brasil,gov,isflsf,h_familias,fbkf,var_estoque,y_total
+0191,"Agricultura, inclusive o apoio à agricultura e a pós-colheita",1696.3571976058497,2078.1274162194018,0.0,0.0,356.79862920719734,41.425351984610934,-1308.6721981474757,2864.0363968695838
+0192,"Pecuária, inclusive o apoio à pecuária",75.54956193551591,161.93978613006752,0.0,0.0,302.3781820274344,93.36026087893819,-51.54249188422546,581.6852990877306
+0280,Produção florestal; pesca e aquicultura,18.572146173380332,67.16051495015586,0.0,0.0,162.9725776435918,5.264387136450869,-4.57175797468561,249.39786792889322
+0580,Extração de carvão mineral e de minerais não-metálicos e metálicos não ferrosos,229.07650594960484,58.470143036462034,0.0,0.0,0.0,0.0,8.392511684983681,295.93916067105056
+0680,"Extração de petróleo e gás, inclusive as atividades de apoio",3594.3,18604.32,0.0,0.0,0.0,1685.3,0.0,23883.92
+0791,"Extração de minério de ferro, inclusive beneficiamentos e a aglomeração",6809.61,22.2,0.0,0.0,0.0,0.0,131.27,6963.08
+1000,Alimentos e bebidas,138.08729858366047,1816.5600885578967,0.0,0.0,3675.457484700243,0.0,-23.67280097362754,5606.4320708681735
+1300,"Fabricação de produtos têxteis, artefatos do vestuário, couro e calçados",9.66,1023.27,0.0,0.0,186.47,0.0,-4.97,1214.43
+1600,"Fabricação de produtos da madeira, móveis e indústrias diversas",12.468126253925412,516.9925153906472,0.0,0.0,488.85217217489856,155.27,-18.963265619553134,1154.6195481999182
+1700,"Fabricação de celulose, papel e produtos de papel",1983.56,431.33,0.0,0.0,109.79,0.0,64.01,2588.69
+1900,"Refino de petróleo, coquerias e fabricação de biocombustíveis",14.609997904018282,231.98980139448776,0.0,0.0,20.089995844019086,0.0,-3.2499970854159814,263.4397980571091
+2000,"Fabricação de químicos, borracha e de material plástico",83.57,1092.3200000000002,0.0,0.0,97.1,0.0,-3.5599999999999996,1269.43
+2300,Fabricação de produtos de minerais não-metálicos,1856.0100000000002,2048.3599999999997,0.0,0.0,27.35,0.0,79.62,4011.3399999999997
+2400,Metalurgia,3812.8700000000003,5455.28,0.0,0.0,5.62,0.0,-154.25,9119.52
+2500,"Fabricação de produtos de metal, máquinas e equipamentos",39.18000000000001,1792.73,0.0,0.0,183.63,491.78000000000003,-4.27,2503.05
+2900,"Fabricação de automóveis, caminhões, peças e outros equipamentos de transporte",2.76,596.86,0.0,0.0,47.47,163.23000000000002,3.84,814.1600000000001
+3500,"Geração e distribuição de eletricidade e gás, água, esgoto e limpeza urbana",0.0,744.5799999999999,0.0,0.0,1625.06,0.0,8.88,2378.52
+4180,Construção,0.0,0.0,0.0,0.0,0.0,8333.86,0.0,8333.86
+4500,Comércio por atacado e a varejo,1360.8899999999999,8955.75,0.0,0.0,4343.48,695.3599999999999,-79.74,15275.74
+4900,Transporte,833.4499999999999,1488.64,0.0,0.0,1674.0,102.5,-13.79,4084.8
+5280,"Armazenamento, atividades auxiliares dos transportes e correio",0.0,0.0,0.0,0.0,93.91,0.0,0.0,93.91
+5500,Alojamento e alimentação,19.699165594045247,0.1697343208812819,0.0,0.0,1992.6609584026164,0.0,0.0,2012.529858317543
+5800,Serviço de informação,0.02,62.88,0.0,0.0,1620.45,0.0,0.95,1684.3000000000002
+6480,"Intermediação financeira, seguros e previdência complementar",0.0,0.0,0.0,0.0,2332.2,0.0,0.0,2332.2
+6800,Atividades imobiliárias,0.0,0.0,0.0,0.0,8711.5,0.0,0.0,8711.5
+6900,"Atividades profissionais, científicas e técnicas",0.0,0.0,0.0,0.0,235.86,0.0,0.0,235.86
+7800,Atividades administrativas e serviços complementares,0.0,0.0,0.0,460.73,583.31,0.0,0.0,1044.04
+8400,Administração Pública,0.0,0.0,11880.37,0.0,0.0,0.0,0.0,11880.37
+8591,Educação pública,0.0,0.0,5019.98,0.0,0.0,0.0,0.0,5019.98
+8592,Educação privada,0.0,0.0,0.0,0.0,1167.36,0.0,0.0,1167.36
+8691,Saúde pública,0.0,0.0,3383.0,0.0,0.0,0.0,0.0,3383.0
+8692,Saúde privada,0.0,0.0,0.0,112.22,2990.61,0.0,0.0,3102.83
+9080,"Atividades artísticas, criativas e de espetáculos",1.72,6.25,0.0,164.61,625.68,0.0,0.0,798.26
+9480,Organizações associativas e outros serviços pessoais,0.0,0.0,0.0,705.32,512.5,0.0,0.0,1217.8200000000002
+9700,Serviços domésticos,0.0,0.0,0.0,0.0,1019.02,0.0,0.0,1019.02
