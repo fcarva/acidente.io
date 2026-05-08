@@ -4,99 +4,165 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage[brazilian]{babel}
+\usepackage[autostyle]{csquotes}   % aspas corretas em pt-BR
 
 % ─── TYPOGRAPHY ───────────────────────────────────────────────────
-\IfFileExists{lmodern.sty}{\usepackage{lmodern}}{}
+\usepackage{mathpazo}              % Palatino — fonte padrão artigos econ
+\usepackage[scaled=0.95]{helvet}   % Helvetica para sans (notas de rodapé)
 \usepackage{microtype}
+\usepackage{indentfirst}           % parágrafo inicial também indentado (ABNT)
 
 % ─── MATH ─────────────────────────────────────────────────────────
 \usepackage{amsmath, amssymb, amsthm}
 \usepackage{mathtools}
+\allowdisplaybreaks                % permite quebra de equações entre páginas
 
 % ─── LAYOUT ───────────────────────────────────────────────────────
-\usepackage[a4paper, margin=2.5cm, top=3cm, bottom=3cm]{geometry}
+% ABNT NBR 14724: margens 3cm (esq/sup) × 2cm (dir/inf) para trabalhos
+% Para artigo de disciplina usa-se margem simétrica:
+\usepackage[a4paper, left=3cm, right=2.5cm, top=3cm, bottom=2.5cm]{geometry}
 \usepackage{setspace}
-\onehalfspacing
-\usepackage{parskip}
+\setstretch{1.5}                   % espaçamento 1,5 — padrão pós-graduação
+\setlength{\parindent}{1.25cm}     % recuo ABNT NBR 14724
+\setlength{\parskip}{6pt}
 
 % ─── TABLES & FIGURES ─────────────────────────────────────────────
 \usepackage{booktabs}
+\usepackage{threeparttable}        % notas de tabela (tnote)
 \usepackage{longtable}
 \usepackage{graphicx}
 \usepackage{caption}
-\captionsetup{font=small, labelfont=bf, labelsep=period}
+\captionsetup{
+  font=small, labelfont=bf, labelsep=period,
+  justification=raggedright, singlelinecheck=false
+}
+\usepackage{subcaption}
 \usepackage{float}
 \usepackage{multirow}
+\usepackage{array}
+\newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 
 % ─── BIBLIOGRAPHY ─────────────────────────────────────────────────
 \usepackage{natbib}
 \bibliographystyle{plainnat}
-\setcitestyle{authoryear, round}
+\setcitestyle{authoryear, round, comma}
 
 % ─── HYPERLINKS ───────────────────────────────────────────────────
-\usepackage[colorlinks=true, linkcolor=black, citecolor=black,
-            urlcolor=black, breaklinks=true]{hyperref}
+\usepackage[
+  colorlinks=true, linkcolor=black, citecolor=black,
+  urlcolor=black, breaklinks=true,
+  pdftitle={Pegada de Acidentes de Trabalho -- MIP-ES 2015},
+  pdfauthor={Felipe Carvalho},
+  pdfsubject={Economia do Trabalho; Insumo-Produto},
+  pdfkeywords={insumo-produto, segurança do trabalho, pegada social, AEAT}
+]{hyperref}
 
-% ─── HEADERS ──────────────────────────────────────────────────────
+% ─── HEADERS & FOOTERS ────────────────────────────────────────────
 \usepackage{fancyhdr}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small\itshape Pegada de acidentes de trabalho \textperiodcentered\ MIP-ES 2015}
+\fancyhead[L]{\small\itshape Pegada de acidentes de trabalho\,\textperiodcentered\,MIP-ES 2015}
 \fancyhead[R]{\small\thepage}
+\fancyfoot[C]{\small PPGEco/UFES --- PECO-5054/6054 --- 2026/1}
 \renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\headheight}{14.5pt}
+
+% ─── CUSTOM COMMANDS ──────────────────────────────────────────────
+% Nota de tabela fora do float (fallback sem threeparttable)
+\newcommand{\tabnote}[1]{\par\smallskip\footnotesize\textit{Notas:} #1}
+% Abreviações comuns
+\newcommand{\vbp}{\textsc{vbp}}
+\newcommand{\cat}{\textsc{cat}}
+\newcommand{\mipes}{\textsc{mip-es}}
+\newcommand{\aeat}{\textsc{aeat}}
 
 % ─── TITLE ────────────────────────────────────────────────────────
-\title{
-  \vspace{-1.5cm}
-  \textbf{Pegada de Acidentes de Trabalho}\\[0.3em]
-  \large\textit{Uma aplicação social-IO à matriz insumo-produto\\
-                do Espírito Santo (2015)}
+\title{%
+  \large\textsc{Universidade Federal do Espírito Santo}\\
+  \small Programa de Pós-Graduação em Economia\\[0.4em]
+  \rule{\linewidth}{0.8pt}\\[0.6em]
+  \LARGE\bfseries Pegada de Acidentes de Trabalho\\[0.4em]
+  \large\normalfont\itshape
+    Uma aplicação de insumo-produto estendido à\\
+    Matriz Insumo-Produto do Espírito Santo (2015)\\[0.4em]
+  \rule{\linewidth}{0.8pt}
 }
-\author{
-  Felipe Carvalho\thanks{Programa de Pós-Graduação em Economia, UFES.
-  Disciplina PECO-5054 / PECO-6054 --- Análise de Insumo-Produto, 2026/1
-  (Prof.\ Dr.\ Celso Bissoli Sessa). E-mail: \texttt{fcarva.eth}.}
+\author{%
+  \large Felipe Carvalho%
+  \thanks{Mestrando em Economia, PPGEco/UFES.
+          Disciplina PECO-5054/PECO-6054 --- Análise de Insumo-Produto, 2026/1.
+          Prof.\ Dr.\ Celso Bissoli Sessa.
+          Contato: \href{mailto:fcarva@ppgeco.ufes.br}{\texttt{fcarva@ppgeco.ufes.br}}.}
 }
-\date{\today}
+\date{Vitória, maio de 2026}
 
 \begin{document}
 \maketitle
-\thispagestyle{empty}
+\thispagestyle{fancy}
+% ── Resumo (pt-BR) ────────────────────────────────────────────────
+\renewcommand{\abstractname}{\normalfont\normalsize\bfseries Resumo}
 \begin{abstract}
-\noindent
+\setstretch{1.0}\small
 Este artigo aplica o modelo de Leontief estendido para mensurar a
 \textit{pegada de acidentes de trabalho} na economia do Espírito Santo
 a partir da Matriz Insumo-Produto estadual de 2015 (35 setores),
 usando como vetor satélite os registros oficiais do Anuário Estatístico
-de Acidentes do Trabalho (AEAT-2015), que totalizam 12,156 CATs no
+de Acidentes do Trabalho (\aeat-2015), que totalizam 12,156~\cat{}s no
 estado. Calculando $\mathbf{f}' = \mathbf{a}'\mathbf{L}$ para cada setor,
 obtém-se que o componente indireto representa em média 37{,}6\,\% da
 pegada total --- indicando que mais de um terço do passivo de acidentes
 embutido em qualquer demanda final típica se origina em atividades
-distintas das que produzem o bem demandado. O setor com maior pegada
-total é Saúde privada (8692), com
-$f = 0{,}735$~CATs por R\$~milhão de demanda final.
+distintas das que produzem o bem demandado.
 Cruzando intensidade direta ($a_j$) com índices de Rasmussen-Hirschman,
 propõe-se uma tipologia de quatro quadrantes que identifica
-6~\textit{setores-chave de risco}: atividades com alta intensidade
-direta \textit{e} elevado encadeamento para trás.
+6~\textit{setores-chave de risco}.
 Uma análise de sensibilidade Monte Carlo ($N = 1\,000$, $\sigma_{\log} = 0{,}20$)
 confirma que 6~setores permanecem no quadrante crítico em mais de
-50\% das iterações, mesmo sob perturbações aleatórias no vetor satélite.
-A extração hipotética dos setores petrolífero (0680) e ferroso (0791)
-reduz a pegada agregada em apenas 2{,}0\% e
-0{,}5\% respectivamente, revelando que o risco físico
-gerado na extração está estruturalmente desconectado da cadeia produtiva
-intra-estadual --- o que denominamos \textit{deslocamento estrutural duplo}
-do risco ocupacional.
+50\% das iterações. A extração hipotética dos setores petrolífero (0680)
+e ferroso (0791) altera a pegada agregada em apenas 2{,}0\%
+e 0{,}5\% respectivamente, revelando o
+\textit{deslocamento estrutural duplo} do risco ocupacional na economia
+capixaba.
+
+\smallskip
+\noindent\textbf{Palavras-chave:} insumo-produto; segurança do trabalho;
+pegada social; ligações de Rasmussen-Hirschman; Espírito Santo; \aeat-2015.\\
+\noindent\textbf{Códigos JEL:} D57; J28; R15.
 \end{abstract}
 
-\noindent\textbf{Palavras-chave:} insumo-produto; segurança do trabalho;
-pegada social; ligações de Rasmussen-Hirschman; Espírito Santo; AEAT-2015.
+% ── Abstract (EN) ─────────────────────────────────────────────────
+\renewcommand{\abstractname}{\normalfont\normalsize\bfseries Abstract}
+\begin{abstract}
+\setstretch{1.0}\small
+This paper applies the extended Leontief model to measure the
+\textit{work accident footprint} of the Espírito Santo economy using
+the 2015 state input-output matrix (35 sectors) and an official
+satellite vector constructed from the 2015 Work Accident Statistical
+Yearbook (\aeat-2015), totalling 12,156 registered accidents.
+The structural (indirect) component accounts for 37{,}6\,\% of
+the total footprint on average, indicating that over one-third of the
+accident liability embedded in any unit of final demand originates
+in sectors other than the direct producer.
+We propose a four-quadrant typology combining accident intensity with
+Rasmussen-Hirschman backward linkages, identifying 6~\textit{key
+risk sectors}. Monte Carlo sensitivity analysis ($N=1\,000$) confirms
+robustness of 6~sectors. Hypothetical extraction of the
+oil-and-gas (0680) and iron-ore (0791) sectors changes the aggregate
+footprint by 2{,}0\% and 0{,}5\%
+respectively, supporting the \textit{double structural displacement}
+hypothesis.
 
-\noindent\textbf{Códigos JEL:} D57; J28; R15.
+\smallskip
+\noindent\textbf{Keywords:} input-output; occupational safety; social footprint;
+Rasmussen-Hirschman linkages; Espírito Santo; AEAT-2015.\\
+\noindent\textbf{JEL Codes:} D57; J28; R15.
+\end{abstract}
 
-\vspace{1em}\hrule
+\vspace{1em}
+\noindent\rule{\linewidth}{0.4pt}
+\vspace{0.5em}
+\setstretch{1.5}
 
 % ════════════════════════════════════════════════════════════════
 \section{Introdução}
@@ -383,20 +449,20 @@ Cinco produtos analíticos compõem os resultados:
   \small
   \caption{Top~10 setores por pegada total $f_j$, MIP-ES 2015}
   \label{tab:top10}
-  \begin{tabular}{llrrrrrr}
+  \begin{tabular}{lp{5.2cm}rrrrrr}
   \toprule
   \textbf{Cód.} & \textbf{Setor} & $a_j$ & $f_j$ & $f_j/a_j$ & \%~ind. & $U_j^B$ \\
   \midrule
     8692 & Saúde privada & 0{,}648 & 0{,}735 & 1{,}13 & 11{,}8\,\% & 0{,}948 \\
-1900 & Refino de petróleo, coquerias e fabricaç\ldots & 0{,}320 & 0{,}359 & 1{,}12 & 10{,}9\,\% & 1{,}201 \\
-1600 & Fabricação de produtos da madeira, móvei\ldots & 0{,}220 & 0{,}255 & 1{,}16 & 13{,}9\,\% & 0{,}981 \\
-5280 & Armazenamento, atividades auxiliares dos\ldots & 0{,}154 & 0{,}198 & 1{,}28 & 22{,}0\,\% & 1{,}054 \\
-2900 & Fabricação de automóveis, caminhões, peç\ldots & 0{,}147 & 0{,}187 & 1{,}28 & 21{,}6\,\% & 1{,}037 \\
-7800 & Atividades administrativas e serviços co\ldots & 0{,}156 & 0{,}174 & 1{,}12 & 10{,}6\,\% & 0{,}875 \\
-0280 & Produção florestal; pesca e aquicultura & 0{,}123 & 0{,}156 & 1{,}27 & 21{,}3\,\% & 1{,}005 \\
-9480 & Organizações associativas e outros servi\ldots & 0{,}112 & 0{,}153 & 1{,}37 & 27{,}0\,\% & 1{,}127 \\
-2300 & Fabricação de produtos de minerais não-m\ldots & 0{,}105 & 0{,}148 & 1{,}41 & 28{,}9\,\% & 1{,}098 \\
-0580 & Extração de carvão mineral e de minerais\ldots & 0{,}109 & 0{,}127 & 1{,}17 & 14{,}7\,\% & 0{,}888 \\
+1900 & Refino de petróleo, coquerias e fabric\ldots & 0{,}320 & 0{,}359 & 1{,}12 & 10{,}9\,\% & 1{,}201 \\
+1600 & Fabricação de produtos da madeira, móv\ldots & 0{,}220 & 0{,}255 & 1{,}16 & 13{,}9\,\% & 0{,}981 \\
+5280 & Armazenamento, atividades auxiliares d\ldots & 0{,}154 & 0{,}198 & 1{,}28 & 22{,}0\,\% & 1{,}054 \\
+2900 & Fabricação de automóveis, caminhões, p\ldots & 0{,}147 & 0{,}187 & 1{,}28 & 21{,}6\,\% & 1{,}037 \\
+7800 & Atividades administrativas e serviços\ldots & 0{,}156 & 0{,}174 & 1{,}12 & 10{,}6\,\% & 0{,}875 \\
+0280 & Produção florestal; pesca e aquicultur\ldots & 0{,}123 & 0{,}156 & 1{,}27 & 21{,}3\,\% & 1{,}005 \\
+9480 & Organizações associativas e outros ser\ldots & 0{,}112 & 0{,}153 & 1{,}37 & 27{,}0\,\% & 1{,}127 \\
+2300 & Fabricação de produtos de minerais não\ldots & 0{,}105 & 0{,}148 & 1{,}41 & 28{,}9\,\% & 1{,}098 \\
+0580 & Extração de carvão mineral e de minera\ldots & 0{,}109 & 0{,}127 & 1{,}17 & 14{,}7\,\% & 0{,}888 \\
   \bottomrule
   \end{tabular}
   \caption*{\footnotesize $f_j$: CATs/R\$~M de demanda final.
@@ -440,7 +506,7 @@ Cinco produtos analíticos compõem os resultados:
   \small
   \caption{Setores-chave de risco (alta $a_j$ e alto $U_j^B$), MIP-ES 2015}
   \label{tab:chave}
-  \begin{tabular}{llrrrr}
+  \begin{tabular}{lp{5.2cm}rrrr}
   \toprule
   \textbf{Cód.} & \textbf{Setor} & $a_j$ & $U_j^B$ & $m^e_j$ & $\tilde{a}_j$ \\
   \midrule
@@ -473,7 +539,7 @@ Cinco produtos analíticos compõem os resultados:
   \small
   \caption{Top-5 multiplicadores de emprego $m^e_j$, MIP-ES 2015}
   \label{tab:emprego}
-  \begin{tabular}{llrrrr}
+  \begin{tabular}{lp{5.2cm}rrrr}
   \toprule
   \textbf{Cód.} & \textbf{Setor} & $m^e_j$ & $a_j$ & $\tilde{a}_j$ & $f_j$ \\
   \midrule
@@ -508,7 +574,7 @@ Cinco produtos analíticos compõem os resultados:
   \caption{Setores robustos --- probabilidade de permanecer em
   \textit{Setor-chave de risco} (Monte Carlo, $N=1\,000$)}
   \label{tab:sensibilidade}
-  \begin{tabular}{llrrrrr}
+  \begin{tabular}{lp{5.2cm}rrrrr}
   \toprule
   \textbf{Cód.} & \textbf{Setor} & Prob. & $f_{P5}$ & $f_{P50}$ & $f_{P95}$ & CV \\
   \midrule
@@ -563,7 +629,7 @@ Cinco produtos analíticos compõem os resultados:
   \caption{Top-5 setores por impacto da extração hipotética
   ($\Delta$CAT\% sobre a pegada agregada)}
   \label{tab:hem_top5}
-  \begin{tabular}{llrr}
+  \begin{tabular}{lp{5.8cm}rr}
   \toprule
   \textbf{Cód.} & \textbf{Setor} & $\Delta$CAT & $\Delta$CAT\,\% \\
   \midrule
