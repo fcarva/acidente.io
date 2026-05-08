@@ -41,7 +41,7 @@ def _nome_abrev(nome: str, maxlen: int = 40) -> str:
 def _setor_row(r: pd.Series, *, show_quad: bool = False) -> str:
     extra = f" & {r.quadrante}" if show_quad else ""
     return (
-        f"  {r.codigo} & {_nome_abrev(r['nome'])} "
+        f"  {r.codigo} & {_nome_abrev(r['nome'], 38)} "
         f"& {_fmt(r.intensidade_direta_a)} "
         f"& {_fmt(r.pegada_estrutural_f)} "
         f"& {_fmt(r.amplificacao_f_sobre_a, 2)} "
@@ -68,60 +68,98 @@ def _preamble() -> str:
     \usepackage[utf8]{inputenc}
     \usepackage[T1]{fontenc}
     \usepackage[brazilian]{babel}
+    \usepackage[autostyle]{csquotes}   % aspas corretas em pt-BR
 
     % ─── TYPOGRAPHY ───────────────────────────────────────────────────
-    \IfFileExists{lmodern.sty}{\usepackage{lmodern}}{}
+    \usepackage{mathpazo}              % Palatino — fonte padrão artigos econ
+    \usepackage[scaled=0.95]{helvet}   % Helvetica para sans (notas de rodapé)
     \usepackage{microtype}
+    \usepackage{indentfirst}           % parágrafo inicial também indentado (ABNT)
 
     % ─── MATH ─────────────────────────────────────────────────────────
     \usepackage{amsmath, amssymb, amsthm}
     \usepackage{mathtools}
+    \allowdisplaybreaks                % permite quebra de equações entre páginas
 
     % ─── LAYOUT ───────────────────────────────────────────────────────
-    \usepackage[a4paper, margin=2.5cm, top=3cm, bottom=3cm]{geometry}
+    % ABNT NBR 14724: margens 3cm (esq/sup) × 2cm (dir/inf) para trabalhos
+    % Para artigo de disciplina usa-se margem simétrica:
+    \usepackage[a4paper, left=3cm, right=2.5cm, top=3cm, bottom=2.5cm]{geometry}
     \usepackage{setspace}
-    \onehalfspacing
-    \usepackage{parskip}
+    \setstretch{1.5}                   % espaçamento 1,5 — padrão pós-graduação
+    \setlength{\parindent}{1.25cm}     % recuo ABNT NBR 14724
+    \setlength{\parskip}{6pt}
 
     % ─── TABLES & FIGURES ─────────────────────────────────────────────
     \usepackage{booktabs}
+    \usepackage{threeparttable}        % notas de tabela (tnote)
     \usepackage{longtable}
     \usepackage{graphicx}
     \usepackage{caption}
-    \captionsetup{font=small, labelfont=bf, labelsep=period}
+    \captionsetup{
+      font=small, labelfont=bf, labelsep=period,
+      justification=raggedright, singlelinecheck=false
+    }
+    \usepackage{subcaption}
     \usepackage{float}
     \usepackage{multirow}
+    \usepackage{array}
+    \newcolumntype{L}[1]{>{\raggedright\arraybackslash}p{#1}}
 
     % ─── BIBLIOGRAPHY ─────────────────────────────────────────────────
     \usepackage{natbib}
     \bibliographystyle{plainnat}
-    \setcitestyle{authoryear, round}
+    \setcitestyle{authoryear, round, comma}
 
     % ─── HYPERLINKS ───────────────────────────────────────────────────
-    \usepackage[colorlinks=true, linkcolor=black, citecolor=black,
-                urlcolor=black, breaklinks=true]{hyperref}
+    \usepackage[
+      colorlinks=true, linkcolor=black, citecolor=black,
+      urlcolor=black, breaklinks=true,
+      pdftitle={Pegada de Acidentes de Trabalho -- MIP-ES 2015},
+      pdfauthor={Felipe Carvalho},
+      pdfsubject={Economia do Trabalho; Insumo-Produto},
+      pdfkeywords={insumo-produto, segurança do trabalho, pegada social, AEAT}
+    ]{hyperref}
 
-    % ─── HEADERS ──────────────────────────────────────────────────────
+    % ─── HEADERS & FOOTERS ────────────────────────────────────────────
     \usepackage{fancyhdr}
     \pagestyle{fancy}
     \fancyhf{}
-    \fancyhead[L]{\small\itshape Pegada de acidentes de trabalho \textperiodcentered\ MIP-ES 2015}
+    \fancyhead[L]{\small\itshape Pegada de acidentes de trabalho\,\textperiodcentered\,MIP-ES 2015}
     \fancyhead[R]{\small\thepage}
+    \fancyfoot[C]{\small PPGEco/UFES --- PECO-5054/6054 --- 2026/1}
     \renewcommand{\headrulewidth}{0.4pt}
+    \renewcommand{\footrulewidth}{0.4pt}
+    \setlength{\headheight}{14.5pt}
+
+    % ─── CUSTOM COMMANDS ──────────────────────────────────────────────
+    % Nota de tabela fora do float (fallback sem threeparttable)
+    \newcommand{\tabnote}[1]{\par\smallskip\footnotesize\textit{Notas:} #1}
+    % Abreviações comuns
+    \newcommand{\vbp}{\textsc{vbp}}
+    \newcommand{\cat}{\textsc{cat}}
+    \newcommand{\mipes}{\textsc{mip-es}}
+    \newcommand{\aeat}{\textsc{aeat}}
 
     % ─── TITLE ────────────────────────────────────────────────────────
-    \title{
-      \vspace{-1.5cm}
-      \textbf{Pegada de Acidentes de Trabalho}\\[0.3em]
-      \large\textit{Uma aplicação social-IO à matriz insumo-produto\\
-                    do Espírito Santo (2015)}
+    \title{%
+      \large\textsc{Universidade Federal do Espírito Santo}\\
+      \small Programa de Pós-Graduação em Economia\\[0.4em]
+      \rule{\linewidth}{0.8pt}\\[0.6em]
+      \LARGE\bfseries Pegada de Acidentes de Trabalho\\[0.4em]
+      \large\normalfont\itshape
+        Uma aplicação de insumo-produto estendido à\\
+        Matriz Insumo-Produto do Espírito Santo (2015)\\[0.4em]
+      \rule{\linewidth}{0.8pt}
     }
-    \author{
-      Felipe Carvalho\thanks{Programa de Pós-Graduação em Economia, UFES.
-      Disciplina PECO-5054 / PECO-6054 --- Análise de Insumo-Produto, 2026/1
-      (Prof.\ Dr.\ Celso Bissoli Sessa). E-mail: \texttt{fcarva.eth}.}
+    \author{%
+      \large Felipe Carvalho%
+      \thanks{Mestrando em Economia, PPGEco/UFES.
+              Disciplina PECO-5054/PECO-6054 --- Análise de Insumo-Produto, 2026/1.
+              Prof.\ Dr.\ Celso Bissoli Sessa.
+              Contato: \href{mailto:fcarva@ppgeco.ufes.br}{\texttt{fcarva@ppgeco.ufes.br}}.}
     }
-    \date{\today}
+    \date{Vitória, maio de 2026}
     """).lstrip("\n")
 
 
@@ -143,41 +181,69 @@ def _abstract(df: pd.DataFrame, hem: pd.DataFrame, sens: pd.DataFrame) -> str:
     n_stable = int((sens.prob_setor_chave > 0.5).sum())
 
     return dedent(rf"""
+    % ── Resumo (pt-BR) ────────────────────────────────────────────────
+    \renewcommand{{\abstractname}}{{\normalfont\normalsize\bfseries Resumo}}
     \begin{{abstract}}
-    \noindent
+    \setstretch{{1.0}}\small
     Este artigo aplica o modelo de Leontief estendido para mensurar a
     \textit{{pegada de acidentes de trabalho}} na economia do Espírito Santo
     a partir da Matriz Insumo-Produto estadual de 2015 (35 setores),
     usando como vetor satélite os registros oficiais do Anuário Estatístico
-    de Acidentes do Trabalho (AEAT-2015), que totalizam {n_cats:,} CATs no
+    de Acidentes do Trabalho (\aeat-2015), que totalizam {n_cats:,}~\cat{{}}s no
     estado. Calculando $\mathbf{{f}}' = \mathbf{{a}}'\mathbf{{L}}$ para cada setor,
     obtém-se que o componente indireto representa em média {_pct(pct_ind)} da
     pegada total --- indicando que mais de um terço do passivo de acidentes
     embutido em qualquer demanda final típica se origina em atividades
-    distintas das que produzem o bem demandado. O setor com maior pegada
-    total é {top['nome'][:45]} ({top.codigo}), com
-    $f = {_fmt(top.pegada_estrutural_f)}$~CATs por R\$~milhão de demanda final.
+    distintas das que produzem o bem demandado.
     Cruzando intensidade direta ($a_j$) com índices de Rasmussen-Hirschman,
     propõe-se uma tipologia de quatro quadrantes que identifica
-    {n_chave}~\textit{{setores-chave de risco}}: atividades com alta intensidade
-    direta \textit{{e}} elevado encadeamento para trás.
+    {n_chave}~\textit{{setores-chave de risco}}.
     Uma análise de sensibilidade Monte Carlo ($N = 1\,000$, $\sigma_{{\log}} = 0{{,}}20$)
     confirma que {n_stable}~setores permanecem no quadrante crítico em mais de
-    50\% das iterações, mesmo sob perturbações aleatórias no vetor satélite.
-    A extração hipotética dos setores petrolífero (0680) e ferroso (0791)
-    reduz a pegada agregada em apenas {_fmt(abs(ext680), 1)}\% e
-    {_fmt(abs(ext791), 1)}\% respectivamente, revelando que o risco físico
-    gerado na extração está estruturalmente desconectado da cadeia produtiva
-    intra-estadual --- o que denominamos \textit{{deslocamento estrutural duplo}}
-    do risco ocupacional.
+    50\% das iterações. A extração hipotética dos setores petrolífero (0680)
+    e ferroso (0791) altera a pegada agregada em apenas {_fmt(abs(ext680), 1)}\%
+    e {_fmt(abs(ext791), 1)}\% respectivamente, revelando o
+    \textit{{deslocamento estrutural duplo}} do risco ocupacional na economia
+    capixaba.
+
+    \smallskip
+    \noindent\textbf{{Palavras-chave:}} insumo-produto; segurança do trabalho;
+    pegada social; ligações de Rasmussen-Hirschman; Espírito Santo; \aeat-2015.\\
+    \noindent\textbf{{Códigos JEL:}} D57; J28; R15.
     \end{{abstract}}
 
-    \noindent\textbf{{Palavras-chave:}} insumo-produto; segurança do trabalho;
-    pegada social; ligações de Rasmussen-Hirschman; Espírito Santo; AEAT-2015.
+    % ── Abstract (EN) ─────────────────────────────────────────────────
+    \renewcommand{{\abstractname}}{{\normalfont\normalsize\bfseries Abstract}}
+    \begin{{abstract}}
+    \setstretch{{1.0}}\small
+    This paper applies the extended Leontief model to measure the
+    \textit{{work accident footprint}} of the Espírito Santo economy using
+    the 2015 state input-output matrix (35 sectors) and an official
+    satellite vector constructed from the 2015 Work Accident Statistical
+    Yearbook (\aeat-2015), totalling {n_cats:,} registered accidents.
+    The structural (indirect) component accounts for {_pct(pct_ind)} of
+    the total footprint on average, indicating that over one-third of the
+    accident liability embedded in any unit of final demand originates
+    in sectors other than the direct producer.
+    We propose a four-quadrant typology combining accident intensity with
+    Rasmussen-Hirschman backward linkages, identifying {n_chave}~\textit{{key
+    risk sectors}}. Monte Carlo sensitivity analysis ($N=1\,000$) confirms
+    robustness of {n_stable}~sectors. Hypothetical extraction of the
+    oil-and-gas (0680) and iron-ore (0791) sectors changes the aggregate
+    footprint by {_fmt(abs(ext680), 1)}\% and {_fmt(abs(ext791), 1)}\%
+    respectively, supporting the \textit{{double structural displacement}}
+    hypothesis.
 
-    \noindent\textbf{{Códigos JEL:}} D57; J28; R15.
+    \smallskip
+    \noindent\textbf{{Keywords:}} input-output; occupational safety; social footprint;
+    Rasmussen-Hirschman linkages; Espírito Santo; AEAT-2015.\\
+    \noindent\textbf{{JEL Codes:}} D57; J28; R15.
+    \end{{abstract}}
 
-    \vspace{{1em}}\hrule
+    \vspace{{1em}}
+    \noindent\rule{{\linewidth}}{{0.4pt}}
+    \vspace{{0.5em}}
+    \setstretch{{1.5}}
     """).lstrip("\n")
 
 
@@ -521,7 +587,7 @@ def _sec_resultados(df: pd.DataFrame, sens: pd.DataFrame) -> str:
     \small
     \caption{{Top~10 setores por pegada total $f_j$, MIP-ES 2015}}
     \label{{tab:top10}}
-    \begin{{tabular}}{{llrrrrrr}}
+    \begin{{tabular}}{{lp{{5.2cm}}rrrrrr}}
     \toprule
     \textbf{{Cód.}} & \textbf{{Setor}} & $a_j$ & $f_j$ & $f_j/a_j$ & \%~ind. & $U_j^B$ \\
     \midrule
@@ -569,7 +635,7 @@ def _sec_resultados(df: pd.DataFrame, sens: pd.DataFrame) -> str:
     \small
     \caption{{Setores-chave de risco (alta $a_j$ e alto $U_j^B$), MIP-ES 2015}}
     \label{{tab:chave}}
-    \begin{{tabular}}{{llrrrr}}
+    \begin{{tabular}}{{lp{{5.2cm}}rrrr}}
     \toprule
     \textbf{{Cód.}} & \textbf{{Setor}} & $a_j$ & $U_j^B$ & $m^e_j$ & $\tilde{{a}}_j$ \\
     \midrule
@@ -597,7 +663,7 @@ def _sec_resultados(df: pd.DataFrame, sens: pd.DataFrame) -> str:
     \small
     \caption{{Top-5 multiplicadores de emprego $m^e_j$, MIP-ES 2015}}
     \label{{tab:emprego}}
-    \begin{{tabular}}{{llrrrr}}
+    \begin{{tabular}}{{lp{{5.2cm}}rrrr}}
     \toprule
     \textbf{{Cód.}} & \textbf{{Setor}} & $m^e_j$ & $a_j$ & $\tilde{{a}}_j$ & $f_j$ \\
     \midrule
@@ -628,7 +694,7 @@ def _sec_resultados(df: pd.DataFrame, sens: pd.DataFrame) -> str:
     \caption{{Setores robustos --- probabilidade de permanecer em
     \textit{{Setor-chave de risco}} (Monte Carlo, $N=1\,000$)}}
     \label{{tab:sensibilidade}}
-    \begin{{tabular}}{{llrrrrr}}
+    \begin{{tabular}}{{lp{{5.2cm}}rrrrr}}
     \toprule
     \textbf{{Cód.}} & \textbf{{Setor}} & Prob. & $f_{{P5}}$ & $f_{{P50}}$ & $f_{{P95}}$ & CV \\
     \midrule
@@ -693,7 +759,7 @@ def _sec_hem(df: pd.DataFrame, hem: pd.DataFrame) -> str:
     \caption{{Top-5 setores por impacto da extração hipotética
     ($\Delta$CAT\% sobre a pegada agregada)}}
     \label{{tab:hem_top5}}
-    \begin{{tabular}}{{llrr}}
+    \begin{{tabular}}{{lp{{5.8cm}}rr}}
     \toprule
     \textbf{{Cód.}} & \textbf{{Setor}} & $\Delta$CAT & $\Delta$CAT\,\% \\
     \midrule
@@ -983,7 +1049,7 @@ def main() -> None:
         _preamble(),
         r"\begin{document}",
         r"\maketitle",
-        r"\thispagestyle{empty}",
+        r"\thispagestyle{fancy}",
         _abstract(df, hem, sens),
         _sec_intro(),
         _sec_teorico(),

@@ -19,6 +19,19 @@ outputs/tables/*.tex
 outputs/figures/*.png
 outputs/figures/*.pdf
 
+# LaTeX auxiliares (gerados na compilação)
+latex/*.aux
+latex/*.log
+latex/*.out
+latex/*.toc
+latex/*.lof
+latex/*.lot
+latex/*.bbl
+latex/*.blg
+*.aux
+*.log
+*.out
+
 # Fontes brutas pesadas (use scripts/00_extract_aeat.py para regenerar)
 data/raw/aeat15tab/
 data/raw/*.zip
