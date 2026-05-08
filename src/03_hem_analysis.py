@@ -30,7 +30,7 @@ from common_io import (
     load_accidents,
     load_io_data,
     safe_inverse,
-)
+)  # safe_inverse is reused for the per-k extraction
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT_TABLE = ROOT / "outputs" / "tables" / "extracao_hipotetica.csv"
@@ -39,16 +39,14 @@ OUT_TABLE = ROOT / "outputs" / "tables" / "extracao_hipotetica.csv"
 def main() -> None:
     OUT_TABLE.parent.mkdir(parents=True, exist_ok=True)
 
-    Z, Y, X, sectors, source_io = load_io_data()
+    Z, A, L, X, Y, sectors, source_io = load_io_data()
     CAT, source_cat = load_accidents()
 
     print(f"[03_hem] MIP-ES fonte: {source_io}")
     print(f"[03_hem] CAT fonte:    {source_cat}")
 
     X_safe = np.where(X <= 0, MIN_PRODUCTION_THRESHOLD, X)
-    A = Z / X_safe[np.newaxis, :]
     I = np.eye(N_SETORES)
-    L = safe_inverse(I - A)
 
     frob = np.linalg.norm((I - A) @ L - I, "fro")
     if frob > FROBENIUS_TOLERANCE:

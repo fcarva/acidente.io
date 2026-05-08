@@ -31,7 +31,6 @@ from common_io import (
     N_SETORES,
     load_accidents,
     load_io_data,
-    safe_inverse,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -43,16 +42,14 @@ OUT_XLSX = OUT_TABLES / "resultados_principais.xlsx"
 def main() -> None:
     OUT_TABLES.mkdir(parents=True, exist_ok=True)
 
-    Z, Y, X, sectors, source_io = load_io_data()
+    Z, A, L, X, Y, sectors, source_io = load_io_data()
     CAT, source_cat = load_accidents()
 
     print(f"[02_io_model] MIP-ES fonte: {source_io}")
     print(f"[02_io_model] CAT fonte:    {source_cat}")
 
     X_safe = np.where(X <= 0, MIN_PRODUCTION_THRESHOLD, X)
-    A = Z / X_safe[np.newaxis, :]                    # A = Z · diag(X)^{-1}
     I = np.eye(N_SETORES)
-    L = safe_inverse(I - A)                          # L = (I − A)^{-1}
 
     frobenius_err = np.linalg.norm((I - A) @ L - I, "fro")
     print(f"[02_io_model] || (I−A)·L − I ||_F = {frobenius_err:.2e}")
@@ -64,8 +61,9 @@ def main() -> None:
     a = CAT / X_safe                                 # intensidade direta
     f = a @ L                                        # pegada estrutural
     indireto = f - a
-    amplif = np.where(a > 0, f / a, np.nan)
-    share_indireto = np.where(f > 0, indireto / f, 0.0)
+    with np.errstate(divide="ignore", invalid="ignore"):
+        amplif = np.where(a > 0, f / np.where(a > 0, a, 1.0), np.nan)
+        share_indireto = np.where(f > 0, indireto / np.where(f > 0, f, 1.0), 0.0)
 
     L_grand_mean = L.mean()
     if L_grand_mean == 0:

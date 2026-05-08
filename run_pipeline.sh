@@ -10,6 +10,11 @@ if ! command -v "$PYTHON_BIN" >/dev/null 2>&1; then
   exit 1
 fi
 
+if [ -f data/raw/aeat15tab/15Act19_01.xls ]; then
+  echo "[0/4] Extraindo tabela 19.1 do AEAT-2015 (Espírito Santo)..."
+  "$PYTHON_BIN" src/00_extract_aeat.py
+fi
+
 echo "[1/4] Preparando dados de acidentes..."
 "$PYTHON_BIN" src/01_data_prep.py
 
