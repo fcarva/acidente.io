@@ -15,19 +15,28 @@ if [ -f data/raw/aeat15tab/15Act19_01.xls ]; then
   "$PYTHON_BIN" src/00_extract_aeat.py
 fi
 
-echo "[1/4] Preparando dados de acidentes..."
+echo "[1/8] Preparando dados de acidentes..."
 "$PYTHON_BIN" src/01_data_prep.py
 
-echo "[2/4] Calculando modelo insumo-produto e indicadores principais..."
+echo "[2/8] Calculando modelo insumo-produto e indicadores principais..."
 "$PYTHON_BIN" src/02_io_model.py
 
-echo "[3/4] Executando extração hipotética (HEM)..."
+echo "[3/8] Executando extração hipotética (HEM)..."
 "$PYTHON_BIN" src/03_hem_analysis.py
 
-echo "[4/5] Gerando visualização em quadrantes..."
+echo "[4/8] Gerando visualização em quadrantes..."
 "$PYTHON_BIN" src/04_viz.py
 
-echo "[5/5] Análise de sensibilidade Monte Carlo..."
+echo "[5/8] Análise de sensibilidade Monte Carlo..."
 "$PYTHON_BIN" src/05_sensibilidade.py
+
+echo "[6/8] Modelo fechado (Type II)..."
+"$PYTHON_BIN" src/06_modelo_fechado.py
+
+echo "[7/8] Campo de influência (Sonis-Hewings)..."
+"$PYTHON_BIN" src/07_campo_influencia.py
+
+echo "[8/8] Decomposição da pegada por componente de demanda final..."
+"$PYTHON_BIN" src/08_decomposicao_demanda.py
 
 echo "Pipeline concluído com sucesso."

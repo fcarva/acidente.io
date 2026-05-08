@@ -17,10 +17,11 @@ Ministério do Trabalho/Previdência.
 | Rasmussen-Hirschman backward | **OK** | U_j = média coluna L / média global L |
 | Multiplicador de produção m_j | **OK** | Σ_i l_ij |
 | HEM (Dietzenbacher) | **OK** | Linha+coluna zeradas; variante Miller-Lahr documentada |
-| Modelo fechado (Type II) | **GAP** | Item 2.5 do programa; não implementado |
-| Multiplicador de emprego | **GAP** | Item 2.4 do programa; ocupações estão em setores.csv mas não usadas |
-| Análise de sensibilidade Monte Carlo | **GAP** | Item 2.1 do plano; nenhuma incerteza propagada |
-| Campo de influência (Sonis-Hewings) | **GAP** | Item 3.2 do programa |
+| Modelo fechado (Type II) | **OK** | 06_modelo_fechado.py; aproximação VA/X p/ wages; induzido = 36,7% |
+| Multiplicador de emprego | **OK** | Em 02_io_model: e, m_e, ã = CAT/L, f̃ |
+| Análise de sensibilidade Monte Carlo | **OK** | 05_sensibilidade.py; 6 setores robustos a ±25% |
+| Campo de influência (Sonis-Hewings) | **OK** | 07_campo_influencia.py; Φ_ij = (a'L)_i · (L1)_j |
+| Decomposição da pegada por demanda | **OK** | 08_decomposicao_demanda.py; 30% interestadual, 14% exterior |
 | Subnotificação (correção) | **GAP** | INSS estima 19% nacional; varia por setor |
 | Setores RJU (8591, 8691) | **LIMITAÇÃO** | RGPS não cobre estatutários |
 | Serviços domésticos (9700) | **LIMITAÇÃO** | Subnotificação severa (CAT=0 em 2015) |
@@ -203,14 +204,35 @@ do TD-60 PDF, por outro lado, mantém-se inadequada como fonte primária.
 3. ✅ **Tabela final** com a + ã + f + f̃ + U + m + quadrante.
 4. ✅ **XLSX oficial IJSN** integrado como fonte primária de A e L.
 
-### Próxima iteração (paper)
+### Próxima iteração (paper) — concluída em 2026-05-08
 
-5. **Modelo fechado Type II** — agora desbloqueado: a Tabela 02 do XLSX
-   oficial tem a coluna 42 (Consumo das famílias) por produto. Aggregação
-   produto→setor via Tabela 10 (D) ou via prefixo de código (sector =
-   primeiros 4 dígitos do código de produto 5-dig).
-6. **Campo de influência F_ij** (matriz 35×35 + top-10 pares críticos).
-7. **Validação cruzada SmartLab vs AEAT** para os top-10 setores.
+5. ✅ **Modelo fechado Type II** — `06_modelo_fechado.py`. Endogeniza
+   famílias via Tabela 03 (DOMÉSTICOS) col 43 + matriz D (Tabela 10).
+   Coluna de consumo: h_setor / Σ(VA). Linha de renda: VA_j/X_j (proxy).
+   Raio espectral A_bar = 0,587 < 1 (convergente). Decomposição:
+   42,1% direto, 21,2% indireto, 36,7% induzido.
+6. ✅ **Campo de influência Φ_ij** — `07_campo_influencia.py`. Formulação
+   ponderada: Φ = (a'L) ⊗ (L·1). Heatmap log10 + tabela top-30 pares.
+   Achado: Saúde privada (8692) é a origem dominante (5 dos top-5 pares
+   com i=8692). Perturbações em A[8692, j] têm o maior impacto agregado.
+7. ✅ **Decomposição da pegada por componente de Y** — `08_decomposicao_demanda.py`.
+   Componentes via Tabela 03 (DOMÉSTICOS), agregação produto→setor via D.
+   Resultado:
+   - Consumo das famílias       37,0%   (4.503 CATs)
+   - Exportações p/ Brasil      30,0%   (3.649 CATs) ← interestadual
+   - Exportações p/ exterior    13,8%   (1.674 CATs)
+   - FBKF (investimento)        10,5%   (1.277 CATs)
+   - Consumo do governo          7,1%     (863 CATs)
+   - ISFLSF + var. estoque       1,6%     (191 CATs)
+   **Insight de policy**: ~44% da pegada serve demanda de fora do ES
+   (BR + exterior). Argumento para responsabilidade compartilhada
+   (consumer responsibility) no desenho de FAP/RAT regional.
+
+### Próxima iteração (extensão acadêmica)
+
+8. **Validação cruzada SmartLab vs AEAT** para os top-10 setores.
+9. **Refinar wages do Type II** com RAIS-2015 (substituir proxy VA/X).
+10. **SDA temporal** com MIP-ES 2010 vs 2015 (decomposição estrutural).
 
 ### Extensão acadêmica (ANPEC/ENABER)
 
