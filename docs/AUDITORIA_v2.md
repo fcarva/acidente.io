@@ -1,5 +1,35 @@
 # Auditoria do projeto — estado em 2026-05-15
-### Revisão: comparativo regional, fontes IPEA, MADE/FEA-USP e pesquisa macroeconômica de São Paulo
+### Revisão: comparativo regional formal, fontes IPEA, MADE/FEA-USP e pesquisa macroeconômica de São Paulo
+
+> **Atualização 2026-05-15 (tarde):** integrados os dados primários da
+> MIP-Brasil 2015 (IBGE, 67 atividades) e do AEAT-2015 nacional
+> (517.356 CATs em 667 CNAEs 4-dígitos), fornecidos pelo usuário. O
+> comparativo BR×ES, antes qualitativo, é agora **formal** com:
+> (i) agregação dos 67 setores BR aos 35 setores ES, (ii) cálculo do
+> vetor $\mathbf{a}^{\text{BR}}$ no mesmo grão setorial, (iii) decomposição
+> shift-share completa, (iv) contrafactual usando $\mathbf{L}^{\text{ES}}$.
+> Pipeline: `src/07_compare_br_es.py`. Saídas em
+> `data/processed/comparativo_br_es*.csv`.
+
+### Achados-chave do comparativo BR×ES (real, não placeholder)
+
+| Métrica | ES | Brasil | ES/BR |
+|---|---|---|---|
+| CATs 2015 (AEAT) | 12.156 | 517.356 | 2,35% |
+| VBP 2015 (R$ bi) | 198,3 | 10.226,9 | 1,94% |
+| $\bar{a}$ (CAT/R$M, ponderado VBP) | 0,0610 | 0,0506 | +20,7% |
+| $\bar{f}$ (pegada média) | 0,1210 | 0,0837 | +44,6% |
+
+**Decomposição shift-share da diferença $\bar{a}^{ES} - \bar{a}^{BR} = +0{,}0105$:**
+- Efeito-composição: **−0,0024 (−23%)** — *contraintuitivo: estrutura ES não é mais perigosa*
+- Efeito-intensidade: **+0,0333 (+318%)** — DOMINANTE
+- Efeito-interação: −0,0204 (−195%)
+
+**Implicação:** o argumento corriqueiro de que o ES é "mais perigoso por ser
+extrativo" é refutado pelos dados. A maior pegada do ES vem de **intensidade
+superior nos mesmos setores** de transformação e serviços (refino, automotivo,
+saúde privada, organizações associativas, florestal, químicos, madeira/móveis),
+não da composição setorial.
 
 Auditoria realizada sobre o branch `claude/audit-regional-comparison-slVye`,
 incorporando quatro eixos de melhoria solicitados: (1) comparação ES × Brasil,
@@ -14,7 +44,7 @@ de São Paulo (NEREUS/USP, FIPE).
 |---|---|---|---|
 | MIP-ES 2015 (Z, A, L) | **OK** | **OK** | — |
 | Vetor satélite CAT | **OK com caveats** | **OK com caveats** | — |
-| Comparativo ES × Brasil | **GAP** | **Parcialmente implementado** | Seção 6 adicionada ao artigo |
+| Comparativo ES × Brasil | **GAP** | **Implementado (formal)** | Seção 6 com decomposição shift-share + contrafactual; `src/07_compare_br_es.py` |
 | Referências IPEA | Incompleto | **Ampliado** | 2 novas refs: Chagas et al. (já tinha) + IPEA Terceirização |
 | Referências MADE/FEA-USP | Incompleto | **Ampliado** | Contextualização na Seção 2 + Made-USP (2023) |
 | Referências NEREUS/USP | Ausente | **Adicionado** | Haddad et al. (2017) + NEREUS (2024) |
@@ -31,26 +61,25 @@ de São Paulo (NEREUS/USP, FIPE).
 
 ### 2.1 O que foi implementado (nesta versão)
 
-A nova **Seção 6** do artigo (`\label{sec:comparativo}`) cobre:
+A nova **Seção 6** do artigo (`\label{sec:comparativo}`) implementa o comparativo **formal** com dados primários:
 
-1. **Tabela de taxas de incidência CAT por setor** — ES vs Brasil (AEAT-2015 + RAIS-2015), para os setores mais relevantes da análise.
-2. **Tabela de participação setorial no VBP** — comparação MIP-ES (35 setores) vs MIP-Brasil (67 atividades, IBGE 2017), mostrando o sobrep eso extrativo do ES (+13,9 p.p. acima da média nacional).
-3. **Decomposição qualitativa do diferencial ES/BR** em efeito-composição e efeito-intensidade, usando o arcabouço shift-share de \citet{made2021multiplicadores}.
-4. **Contextualização dos encadeamentos** com referência aos índices Rasmussen-Hirschman publicados pelo CECEG/UFES e ao estudo NEREUS de matrizes interestaduais.
-5. **Link com literatura IPEA sobre terceirização** (IPEA 2018, Radar 56): setores com alta externalização de mão-de-obra apresentam risco 3,4× maior — argumento que reforça os achados dos *propagadores estruturais*.
+1. **Tabela macroeconômica** — CATs, VBP e intensidade agregada $\bar{a}$ ES vs Brasil; pegada média $\bar{f}$ calculada com $\mathbf{L}^{\text{ES}}$ aplicada a ambos os vetores.
+2. **Decomposição shift-share formal** (eq. 1 do artigo) — três componentes (composição, intensidade, interação) calculados sobre os 35 setores, com achado contraintuitivo de composição negativa.
+3. **Tabela de estrutura do VBP por grande grupo** — confirmação quantitativa de que o ES tem 7× mais extrativismo que a média nacional.
+4. **Top-10 setores por razão $a^{ES}/a^{BR}$** — identifica refino (23,9×), automotivo (2,8×), saúde privada (2,2×), organizações (2,0×) e florestal (2,0×) como os maiores diferenciais.
+5. **Contrafactual de pegada** com $\mathbf{L}^{\text{ES}}$ × $\mathbf{a}^{\text{BR}}$ — quantifica o excedente ES em +45% sobre o benchmark nacional.
 
-### 2.2 O que ainda falta para o comparativo completo
+Pipeline: `src/07_compare_br_es.py`. Dados primários em `data/raw/br/`.
 
-Para o comparativo formal $\mathbf{f}^{\text{ES}}$ vs $\mathbf{f}^{\text{BR}}$ (previsto na agenda de pesquisa):
+### 2.2 Próximos passos para o comparativo
 
-| Tarefa | Dado necessário | Fonte | Bloqueio |
-|---|---|---|---|
-| Construir vetor $\mathbf{a}^{\text{BR}}$ | AEAT-2015 nacional por setor | MPS/Dataprev | Mapeamento CNAE→SCN-67 |
-| Carregar MIP-Brasil 2015 | Matriz A (67×67) | IBGE | Download do XLSX IBGE |
-| Calcular $\mathbf{f}^{\text{BR}} = \mathbf{a}^{\text{BR}}\mathbf{L}^{\text{BR}}$ | A e L nacionais | IBGE + CECEG | Tabela de concordância SCN-67→MIP-35 |
-| Shift-share formal | Ambos os vetores | — | Aguarda itens acima |
-
-**Estimativa de esforço:** 1–2 dias de trabalho com acesso ao XLSX IBGE e à tabela de de-para CNAE-2.0/SCN-67.
+| Tarefa | Status | Observação |
+|---|---|---|
+| Vetor $\mathbf{a}^{\text{BR}}$ | **Concluído** | `load_aeat_br()` — AEAT Tab 1.1 col 6 (CATs com registro) |
+| MIP-Brasil 2015 VBP | **Concluído** | `load_mip_br_vbp()` — Tab 01 linha Total |
+| Agregação BR-67 → ES-35 | **Concluído** | `BR67_TO_ES35` + `cnae4_to_es35()` |
+| Shift-share + contrafactual | **Concluído** | Seção 6 do artigo |
+| $\mathbf{f}^{\text{BR}}$ com $\mathbf{L}^{\text{BR}}$ independente | Pendente | Requer construção explícita da Leontief nacional de 67 setores |
 
 ---
 
@@ -161,13 +190,13 @@ Atualizada para refletir que o comparativo qualitativo já está na Seção 6 e 
 
 ## 7. Lacunas remanescentes (não fechadas)
 
-### 7.1 🔴 Comparativo BR×ES formal (vetor $\mathbf{f}^{\text{BR}}$)
+### 7.1 🟢 Comparativo BR×ES formal — **concluído**
 
-A Seção 6 adicionada é qualitativa e usa dados secundários. O comparativo completo requer:
-1. Download da MIP-Brasil IBGE 2015 (XLSX, 67 setores)
-2. Construção do vetor $\mathbf{a}^{\text{BR}}$ via AEAT-2015 nacional (Capítulo 19 do AEAT)
-3. Mapeamento CNAE 2.0 → SCN-67 → MIP-35 (equivalência ES↔BR)
-4. Cálculo de $\mathbf{f}^{\text{BR}}$ e comparação setor a setor
+Seção 6 implementa comparativo formal com dados primários (MIP-BR 2015/IBGE + AEAT-2015 nacional).
+Pipeline em `src/07_compare_br_es.py`. Vetores $\mathbf{a}^{\text{ES}}$ e $\mathbf{a}^{\text{BR}}$ calculados
+sobre os mesmos 35 setores; decomposição shift-share e contrafactual $\mathbf{f}^{\text{BR}} = \mathbf{a}^{\text{BR}}\mathbf{L}^{\text{ES}}$ implementados.
+
+Remanescente: $\mathbf{f}^{\text{BR}} = \mathbf{a}^{\text{BR}}\mathbf{L}^{\text{BR}}$ com Leontief nacional independente (ver 2.2).
 
 ### 7.2 🔴 Modelo fechado Type II
 

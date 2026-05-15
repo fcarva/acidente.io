@@ -123,7 +123,12 @@ confirma que 6~setores permanecem no quadrante crítico em mais de
 e ferroso (0791) altera a pegada agregada em apenas 2{,}0\%
 e 0{,}5\% respectivamente, revelando o
 \textit{deslocamento estrutural duplo} do risco ocupacional na economia
-capixaba.
+capixaba. Um exercício comparativo com a MIP-Brasil 2015 (IBGE, 67~atividades)
+mostra ainda que a maior intensidade agregada do ES ($+21\,\%$ vs Brasil)
+\textit{não} se explica por efeito-composição (especialização extrativa),
+mas por efeito-intensidade nos setores de transformação e serviços ---
+exatamente os \textit{propagadores estruturais} identificados pela
+tipologia.
 
 \smallskip
 \noindent\textbf{Palavras-chave:} insumo-produto; segurança do trabalho;
@@ -151,7 +156,12 @@ robustness of 6~sectors. Hypothetical extraction of the
 oil-and-gas (0680) and iron-ore (0791) sectors changes the aggregate
 footprint by 2{,}0\% and 0{,}5\%
 respectively, supporting the \textit{double structural displacement}
-hypothesis.
+hypothesis. A comparative exercise against the 2015 Brazilian
+input-output matrix (IBGE, 67~activities) shows that the higher
+aggregate intensity in ES ($+21\,\%$ vs Brazil) is driven by an
+intensity effect, not a composition effect: the state's extractive
+specialization, weighted by national intensities, would yield a
+\textit{lower} accident rate, contradicting the standard narrative.
 
 \smallskip
 \noindent\textbf{Keywords:} input-output; occupational safety; social footprint;
@@ -192,19 +202,20 @@ da média nacional que, simultaneamente, produzem bens com alta
 inserção exportadora.
 
 Em nível nacional, o Brasil registrou em 2015 aproximadamente
-574,2~mil acidentes de trabalho com CAT emitida, segundo o AEAT-2015,
-resultando em uma taxa de incidência de 1,22\,\% sobre o total de
-vínculos RAIS \citep{aeat2016}. O Espírito Santo, com 12.156~CATs e
-aproximadamente 750~mil vínculos formais, apresentou taxa de 1,62\,\%
---- 33\,\% acima da média brasileira \citep{smartlab2024}. Esse
-diferencial reflete a especialização extrativo-industrial do estado:
-enquanto o perfil setorial nacional é dominado pelo setor de serviços
-e pela indústria de transformação de menor risco, o ES combina um núcleo
-exportador intensivo em recursos naturais com uma base de serviços
-que consome insumos de cadeia longa~\citep{haddad2017iioas}.
-A abordagem insumo-produto permite decompor esse diferencial entre
-efeito de especialização setorial, efeito de intensidade e efeito
-de estrutura de encadeamentos.
+517~mil acidentes do trabalho com CAT computada no AEAT, ante
+12.156~CATs no Espírito Santo \citep{aeat2016}. Em termos de pegada
+direta por unidade de produção (CATs por R\$~milhão de VBP), a
+intensidade agregada estadual é cerca de 21\,\% superior à média
+brasileira (0{,}061 vs 0{,}051 CATs/R\$~M). A Seção~\ref{sec:comparativo}
+mostra, contudo, que esse diferencial \textit{não} se explica
+pela especialização extrativa do estado --- a decomposição shift-share
+revela efeito-composição \textit{negativo} ($-23\,\%$ da diferença) e
+efeito-intensidade fortemente \textit{positivo} (+318\,\%), em uma
+estrutura econômica em que o ES detém a segunda maior razão
+produção-exportações entre os estados brasileiros
+\citep{haddad2017iioas}. A abordagem insumo-produto torna possível
+separar efeito de especialização setorial, efeito de intensidade e
+efeito de estrutura de encadeamentos.
 
 A pergunta deste artigo é, portanto: \textbf{qual o conteúdo de
 acidentes de trabalho embutido em uma unidade de demanda final por
@@ -780,137 +791,229 @@ Cinco produtos analíticos compõem os resultados:
 \label{sec:comparativo}
 % ════════════════════════════════════════════════════════════════
 
-Esta seção posiciona os resultados da MIP-ES 2015 no contexto da
-estrutura produtiva e do padrão de acidentes nacionais, usando como
-referência a MIP-Brasil 2015 do IBGE (67 atividades produtivas) e
-os microdados nacionais do AEAT-2015 \citep{ibge2017mipbr,aeat2016}.
+Esta seção replica o exercício de pegada para a economia brasileira
+agregada, usando a MIP-Brasil~2015 do IBGE (67~atividades produtivas)
+e o AEAT-2015 nacional, e compara setor a setor com os resultados da
+MIP-ES \citep{ibge2017mipbr,aeat2016}. As 67~atividades da MIP-Brasil
+são agregadas para os mesmos 35~setores da MIP-ES por meio de
+correspondência IBGE/SCN, e os 667~códigos CNAE 4-dígitos do AEAT
+nacional (517.356~CATs em 2015) são alocados ao mesmo grão setorial.
 
-\subsection{Perfil nacional de acidentes por setor (AEAT-2015)}
+\subsection{Magnitudes agregadas}
 
-A Tabela~\ref{tab:bres_taxas} sintetiza as taxas de incidência de CAT
-(por 100~vínculos ativos) para os setores mais relevantes desta análise,
-comparando o Espírito Santo com a média nacional.
+A Tabela~\ref{tab:bres_macro} compara os agregados de base.
 
 \begin{table}[H]
 \centering
 \small
-\caption{Taxas de incidência de CAT por 100 vínculos RAIS --- ES vs Brasil, 2015}
-\label{tab:bres_taxas}
-\begin{tabular}{lp{5.0cm}rrl}
+\caption{Comparativo macroeconômico ES $\times$ Brasil, 2015}
+\label{tab:bres_macro}
+\begin{tabular}{lrrr}
 \toprule
-\textbf{Cód.} & \textbf{Setor} & \textbf{ES} & \textbf{Brasil} & \textbf{ES/BR} \\
+\textbf{Variável} & \textbf{ES} & \textbf{Brasil} & \textbf{ES/BR (\%)} \\
 \midrule
-0680 & Extração de petróleo e gás & -- & 2,10 & \textit{n.d.} \\
-0791 & Extração de minério de ferro & 3,47 & 3,82 & 0,91 \\
-1900 & Refino de petróleo & 10,82 & 4,30 & 2,52$^{\star}$ \\
-4180 & Construção & 1,95 & 2,20 & 0,89 \\
-8692 & Saúde privada & 5,21 & 4,85 & 1,07 \\
-7800 & Atividades administrativas & 1,12 & 0,98 & 1,14 \\
-\midrule
-\multicolumn{2}{l}{\textit{Total (economia formal)}} & 1,62 & 1,22 & 1,33 \\
+VBP total (R\$~bilhões correntes) & 198,3 & 10.226,9 & 1,94\,\% \\
+CATs registradas em 2015 & 12.156 & 517.356 & 2,35\,\% \\
+Intensidade agregada $\bar{a}$ (CATs/R\$~M) & 0,0610 & 0,0506 & 120,7\,\% \\
+Pegada média $\bar{f}$ (CATs/R\$~M) & 0,1210 & 0,0837 & 144,6\,\% \\
 \bottomrule
 \end{tabular}
-\caption*{\footnotesize Taxas calculadas sobre vínculos ativos RAIS-2015.
-$^\star$~O valor elevado para o refino no ES reflete o tamanho reduzido
-do setor no estado (VBP~R\$~328~M; 105~CATs), tornando a taxa volátil
-para pequenas variações.
-\textit{n.d.}: setor 0680 não aparece individualizado no AEAT-ES por
-questões de sigilo estatístico.
-Fontes: \citet{aeat2016}; RAIS-2015 (MTE).}
+\caption*{\footnotesize $\bar{a}$ ponderada pelo VBP setorial.
+$\bar{f}$ calculada como $\frac{1}{n}\sum_j f_j$ usando $\mathbf{L}^{\text{ES}}$
+para o ES e $\mathbf{L}^{\text{ES}}$ aplicada a $\mathbf{a}^{\text{BR}}$
+no contrafactual.
+Fontes: MIP-ES 2015/IJSN; MIP-Brasil 2015/IBGE; AEAT-2015.}
 \end{table}
 
-O diferencial agregado ES/BR de 1,33 não decorre exclusivamente de maior
-perigosidade intrínseca dos setores capixabas: é em parte resultado de
-um \textit{efeito de composição}, pois a participação relativa dos
-setores extrativos e de transformação pesada no VBP estadual é
-sistematicamente superior à participação nacional. O Espírito Santo
-detém a segunda maior razão produção-exportações entre os estados
-brasileiros \citep{haddad2017iioas}, o que significa que sua estrutura
-setorial é mais exposta a atividades de alto risco por unidade de PIB.
+A pegada média do ES é cerca de 45\,\% superior à pegada brasileira
+quando se aplica a mesma estrutura intersetorial. Esse hiato é
+substancialmente maior que o diferencial dos vetores diretos
+$\bar{a}$ (+20{,}7\,\%), indicando que os encadeamentos da economia
+capixaba \textit{amplificam} estruturalmente a vantagem nacional em
+termos de intensidade direta.
 
-\subsection{Estrutura produtiva: diferenças entre MIP-ES e MIP-Brasil}
+\subsection{Decomposição shift-share da intensidade agregada}
 
-A Tabela~\ref{tab:bres_vbp} compara a participação dos grandes grupos
-setoriais no VBP da MIP-ES 2015 (35 setores) e da MIP-Brasil 2015
-(IBGE, 67 atividades, agregadas para comparabilidade).
+A diferença na intensidade agregada $\bar{a}^{\text{ES}} - \bar{a}^{\text{BR}}$
+admite decomposição clássica em três efeitos:
+%
+\begin{equation}
+\underbrace{\bar{a}^{\text{ES}} - \bar{a}^{\text{BR}}}_{\Delta\bar{a}}
+\;=\;
+\underbrace{\sum_j (s_j^{\text{ES}} - s_j^{\text{BR}})\, a_j^{\text{BR}}}_{\text{composição}}
+\;+\;
+\underbrace{\sum_j s_j^{\text{BR}} (a_j^{\text{ES}} - a_j^{\text{BR}})}_{\text{intensidade}}
+\;+\;
+\underbrace{\sum_j (s_j^{\text{ES}} - s_j^{\text{BR}})(a_j^{\text{ES}} - a_j^{\text{BR}})}_{\text{interação}},
+\label{eq:shiftshare}
+\end{equation}
+%
+em que $s_j = x_j / \sum_k x_k$ é a participação setorial no VBP.
+
+A Tabela~\ref{tab:bres_shiftshare} apresenta o resultado.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Decomposição shift-share do diferencial $\bar{a}^{\text{ES}} - \bar{a}^{\text{BR}}$, 2015}
+\label{tab:bres_shiftshare}
+\begin{tabular}{lrr}
+\toprule
+\textbf{Componente} & \textbf{Valor (CAT/R\$M)} & \textbf{\% do total} \\
+\midrule
+$\bar{a}^{\text{ES}}$ & 0{,}0610 & --- \\
+$\bar{a}^{\text{BR}}$ & 0{,}0506 & --- \\
+$\Delta\bar{a}$ total & $+0{,}0105$ & 100{,}0\,\% \\
+\quad Efeito-composição & $-0{,}0024$ & $-23{,}3$\,\% \\
+\quad Efeito-intensidade & $+0{,}0333$ & $+318{,}4$\,\% \\
+\quad Efeito-interação & $-0{,}0204$ & $-195{,}1$\,\% \\
+\bottomrule
+\end{tabular}
+\caption*{\footnotesize Cálculo a partir de \eqref{eq:shiftshare} sobre
+os 35~setores da MIP-ES. O efeito-interação capta a covariância negativa
+entre desvio-estrutura ($s_j^{\text{ES}} - s_j^{\text{BR}}$) e
+desvio-intensidade ($a_j^{\text{ES}} - a_j^{\text{BR}}$).}
+\end{table}
+
+\paragraph{Achado principal.}
+O resultado contraintuitivo é que o efeito-composição é
+\textit{negativo}: se aplicássemos as intensidades $a_j^{\text{BR}}$
+à estrutura $s_j^{\text{ES}}$, a taxa agregada do ES seria
+\textit{inferior} à média nacional. A maior pegada do ES não decorre
+de uma estrutura produtiva mais perigosa por composição, mas sim de
+uma \textit{intensidade superior nos mesmos setores}: o efeito-intensidade
+($+0{,}0333$) explica 318\,\% da diferença total, sendo parcialmente
+compensado pelos efeitos negativos de composição e de interação.
+
+Esse achado contradiz a interpretação ingênua --- ainda comum em
+debates de política --- de que a maior taxa de acidentes do ES resulta
+de seu perfil extrativo-industrial. Os dados mostram o contrário: o
+extrativismo capixaba, ponderado pelas intensidades nacionais, geraria
+taxa de CAT \textit{abaixo} da média brasileira.
+
+\subsection{Estrutura setorial: onde está o gap}
+
+A Tabela~\ref{tab:bres_vbp} mostra a participação no VBP por grande grupo
+setorial.
 
 \begin{table}[H]
 \centering
 \small
 \caption{Participação no VBP por grande grupo --- ES vs Brasil, 2015 (\%)}
 \label{tab:bres_vbp}
-\begin{tabular}{lrrl}
+\begin{tabular}{lrrr}
 \toprule
-\textbf{Grupo setorial} & \textbf{ES (\%)} & \textbf{BR (\%)} & \textbf{Diferença} \\
+\textbf{Grupo setorial} & \textbf{ES (\%)} & \textbf{Brasil (\%)} & \textbf{Diferença} \\
 \midrule
-Agropecuária (01--03) & 4,3 & 5,8 & $-1,5$~p.p. \\
-Indústria extrativa (05--09) & 17,5 & 3,6 & $+13,9$~p.p. \\
-Indústria de transformação (10--33) & 22,8 & 26,1 & $-3,3$~p.p. \\
-Construção (41--43) & 6,5 & 6,7 & $-0,2$~p.p. \\
-Serviços (45--99) & 49,0 & 57,8 & $-8,8$~p.p. \\
+Agropecuária (01--03) & 3{,}2 & 4{,}7 & $-1{,}5$~p.p. \\
+Indústria extrativa (05--09) & 17{,}5 & 2{,}5 & $+14{,}9$~p.p. \\
+Indústria de transformação (10--33) & 23{,}5 & 30{,}3 & $-6{,}8$~p.p. \\
+Construção (41--43) & 5{,}8 & 6{,}2 & $-0{,}4$~p.p. \\
+Serviços (45--99) & 50{,}1 & 56{,}3 & $-6{,}1$~p.p. \\
 \midrule
-Total & 100,0 & 100,0 & \\
+Total & 100{,}0 & 100{,}0 & --- \\
 \bottomrule
 \end{tabular}
-\caption*{\footnotesize ES: MIP-ES 2015/IJSN. Brasil: MIP-Brasil 2015/IBGE
-\citep{ibge2017mipbr}. Grupos agregados por prefixo CNAE\,2.0.}
+\caption*{\footnotesize MIP-ES 2015/IJSN; MIP-Brasil 2015/IBGE
+\citep{ibge2017mipbr}, agregada aos 35~setores da MIP-ES.}
 \end{table}
 
-A discrepância mais saliente é a indústria extrativa: 17,5\,\% do VBP
-capixaba contra apenas 3,6\,\% nacional. Essa sobreparticipação de
-atividades extrativas --- com encadeamentos a montante tipicamente mais
-curtos, como evidenciado pelo HEM (Seção~\ref{sec:hem}) --- explica,
-em parte, por que a taxa de CAT estadual supera a nacional mesmo que
-a intensidade por setor não seja necessariamente superior.
+O ES tem \textbf{quase sete vezes} a participação extrativa do Brasil
+(17{,}5\,\% vs 2{,}5\,\%). Mas, contrariando a hipótese composicional,
+os setores extrativos do ES apresentam intensidades CAT/VBP
+\textit{próximas ou inferiores} à média nacional: $a_{0680}^{\text{ES}} = 0{,}0047$
+contra $a_{0680}^{\text{BR}} = 0{,}0042$; $a_{0791}^{\text{ES}} = 0{,}0109$
+contra $a_{0791}^{\text{BR}} = 0{,}0139$. O VBP por trabalhador
+extremamente alto desses setores no ES (operação \textit{offshore} de
+Petrobras; minério de Vale) dilui os CATs sobre uma base monetária
+maior, reduzindo $a_j$ \textit{independentemente} da periculosidade
+intrínseca.
 
-\subsection{Encadeamentos: ES vs média nacional}
+\subsection{Setores com maior diferencial ES/BR}
 
-A comparação dos índices de Rasmussen-Hirschman da MIP-ES com os
-publicados para a MIP-Brasil pelo CECEG/UFES \citep{ceceg2025mips}
-revela um padrão consistente: os setores extrativos capixabas
-apresentam $U_j^B < 1$ (baixo encadeamento para trás), alinhados com
-a estrutura observada no nível nacional para essas mesmas atividades.
-Em contrapartida, os setores de serviços e transformação do ES exibem
-$U_j^B$ ligeiramente superiores à média nacional --- reflexo de uma
-base industrial mais integrada verticalmente no entorno de Vitória
-(siderurgia, celulose, alimentos).
+A Tabela~\ref{tab:bres_setores} reporta os 10~setores com maior
+razão $a_j^{\text{ES}}/a_j^{\text{BR}}$.
 
-Do ponto de vista da SST, isso implica que uma política de fiscalização
-orientada pelos encadeamentos produtivos terá alvos similares em ES e
-no Brasil (construção, transporte, serviços auxiliares), mas deverá
-ajustar os pesos para a sobreparticipação extrativa capixaba.
-Estudos recentes do IPEA sobre terceirização e acidentes de trabalho
-mostram que setores com alta externalização de mão-de-obra apresentam
-risco 3,4 vezes maior que a média formal do setor
-\citep{ipea2018terc} --- dado especialmente relevante para os
-\textit{propagadores estruturais} identificados neste paper, onde
-a terceirização é estrutural (serviços administrativos, limpeza,
-segurança).
+\begin{table}[H]
+\centering
+\small
+\caption{Setores com maior intensidade relativa $a_j^{\text{ES}}/a_j^{\text{BR}}$ (CATs/R\$~M), 2015}
+\label{tab:bres_setores}
+\begin{tabular}{lp{5.0cm}rrr}
+\toprule
+\textbf{Cód.} & \textbf{Setor} & $a_j^{\text{ES}}$ & $a_j^{\text{BR}}$ & \textbf{Razão} \\
+\midrule
+1900 & Refino de petróleo$^{\star}$ & 0{,}320 & 0{,}013 & 23{,}94 \\
+2900 & Automóveis, caminhões e peças & 0{,}147 & 0{,}053 & 2{,}80 \\
+8692 & Saúde privada & 0{,}648 & 0{,}297 & 2{,}19 \\
+9480 & Organizações associativas e serviços pessoais & 0{,}112 & 0{,}055 & 2{,}03 \\
+0280 & Produção florestal; pesca e aquicultura & 0{,}123 & 0{,}062 & 2{,}00 \\
+2000 & Químicos, borracha e plástico & 0{,}082 & 0{,}041 & 1{,}99 \\
+1600 & Madeira, móveis e diversas & 0{,}220 & 0{,}120 & 1{,}83 \\
+3500 & Energia, água, esgoto, limpeza & 0{,}071 & 0{,}043 & 1{,}65 \\
+7800 & Atividades administrativas e serviços compl. & 0{,}156 & 0{,}110 & 1{,}42 \\
+1000 & Alimentos e bebidas & 0{,}079 & 0{,}064 & 1{,}24 \\
+\midrule
+1700 & Celulose, papel e produtos de papel & 0{,}019 & 0{,}064 & 0{,}30 \\
+\bottomrule
+\end{tabular}
+\caption*{\footnotesize $^{\star}$~Razão 23{,}94 do refino reflete o
+tamanho reduzido do setor no ES (VBP~R\$~328~M; 105~CATs), tornando
+$a_j^{\text{ES}}$ volátil. Excluído do refino, o segundo maior diferencial
+é automotivo (2{,}80×). Linha final (1700): único setor relevante em que
+ES tem intensidade \textit{inferior} ao Brasil --- evidência de que
+celulose capixaba (Suzano/Aracruz) tem padrão de SST acima da média
+setorial brasileira.}
+\end{table}
 
-\subsection{Interpretação: o que a diferença ES $\times$ BR revela}
+A robustez do achado é confirmada pela presença, no ranking, dos
+mesmos setores identificados como \textit{setores-chave de risco}
+no quadrante ES (Tabela~\ref{tab:chave}): refino, automotivo, saúde
+privada, organizações associativas, florestal, químicos, madeira/móveis
+e administrativos --- todos com intensidade ES superior a 1{,}4× a
+média nacional.
 
-A taxa de CAT agregada do ES superior à média nacional (1,62 vs 1,22)
-decompõe-se, aproximadamente, em:
+\subsection{Pegada estrutural: ES vs contrafactual nacional}
+
+Aplicando $\mathbf{L}^{\text{ES}}$ tanto a $\mathbf{a}^{\text{ES}}$
+quanto a $\mathbf{a}^{\text{BR}}$ (mantendo fixa a estrutura
+intersetorial), compara-se a pegada efetiva do ES com o contrafactual
+``ES com intensidade nacional''. A pegada média efetiva é
+0{,}121~CATs/R\$~M no ES versus 0{,}084~CATs/R\$~M no contrafactual ---
+um excedente capixaba de 45\,\% que se concentra exatamente nos
+mesmos setores-chave: saúde privada ($+0{,}394$), refino ($+0{,}306$),
+madeira/móveis ($+0{,}107$), automotivo ($+0{,}105$), florestal
+($+0{,}070$) e organizações associativas ($+0{,}062$).
+
+\paragraph{Conexão com a literatura IPEA.}
+O excedente concentra-se em setores onde o IPEA documenta forte
+incidência de terceirização --- saúde privada, organizações
+associativas, atividades administrativas e construção
+\citep{ipea2024terc}. A hipótese plausível é que parte do diferencial
+ES/BR seja explicada por uma intensidade de terceirização superior
+na economia capixaba, mediada pelo modelo industrial Vale-ArcelorMittal-Petrobras
+e suas cadeias de fornecedores terceirizados. A verificação formal
+dessa hipótese exige microdados RAIS por modalidade de contrato,
+fora do escopo desta análise.
+
+\subsection{Implicações para a política de SST}
+
+O comparativo ES $\times$ Brasil reforça o argumento central do paper
+em três direções:
 %
 \begin{enumerate}
-  \item \textbf{Efeito-composição} ($+0,25$~p.p. estimado): maior
-    participação de setores extrativos no VBP estadual, que têm taxas
-    de acidente médias superiores.
-  \item \textbf{Efeito-intensidade} ($+0,15$~p.p. estimado): setores
-    específicos do ES com intensidade ligeiramente maior que seus
-    correspondentes nacionais (refino, saúde privada).
+  \item A taxa estadual superior \textit{não} é um efeito direto do
+    extrativismo (efeito-composição é negativo), refutando a narrativa
+    intuitiva.
+  \item A vantagem comparativa \textit{negativa} do ES está nos
+    setores de \textit{transformação} e \textit{serviços} ---
+    precisamente os \textit{propagadores estruturais} identificados
+    no quadrante de risco.
+  \item Uma política estadual de SST orientada apenas à mineração e
+    petróleo seria duplamente ineficiente: esses setores têm
+    intensidade próxima à média nacional \textit{e} baixo encadeamento
+    intra-estadual (Seção~\ref{sec:discussao}).
 \end{enumerate}
-
-Essa decomposição segue a lógica da análise de desvio-participação
-(\textit{shift-share}) aplicada a variáveis satélite IO, conforme
-proposta por \citet{made2021multiplicadores} para multiplicadores de
-transferências sociais.
-A extensão formal desse exercício --- replicando $\mathbf{f}' = \mathbf{a}'\mathbf{L}$
-para a MIP-Brasil e comparando os vetores $\mathbf{f}^{\text{ES}}$
-e $\mathbf{f}^{\text{BR}}$ setor a setor --- é elencada na agenda de
-pesquisa futura (Seção~\ref{sec:conclusao}), dependendo da integração
-das bases AEAT nacional com a MIP-Brasil 67 setores via tabela de
-concordância CNAE/SCN.
 
 % ════════════════════════════════════════════════════════════════
 \section{Discussão: deslocamento estrutural duplo}
@@ -1105,12 +1208,14 @@ Cinco extensões naturais ficam registradas:
   \item \textbf{Modelo fechado Type~II.} Incluir o vetor de consumo
     das famílias em $\mathbf{A}$ para capturar o efeito-renda nos
     multiplicadores (coluna 42 do XLSX oficial IJSN já disponível).
-  \item \textbf{Comparativo Brasil--ES formal.} Replicar
-    $\mathbf{f}' = \mathbf{a}'\mathbf{L}$ na MIP-Brasil 2015
-    \citep{ibge2017mipbr,ceceg2025mips} e realizar decomposição
-    \textit{shift-share} setorial dos diferenciais de pegada,
-    partindo da contextualização qualitativa oferecida na
-    Seção~\ref{sec:comparativo}.
+  \item \textbf{Comparativo Brasil--ES com $\mathbf{L}^{\text{BR}}$
+    independente.} A Seção~\ref{sec:comparativo} usa
+    $\mathbf{L}^{\text{ES}}$ como referência para a comparação
+    contrafactual. A extensão natural é calcular
+    $\mathbf{f}^{\text{BR}} = \mathbf{a}^{\text{BR}{\prime}}\mathbf{L}^{\text{BR}}$
+    com a matriz de Leontief nacional (67~atividades, agregadas), e
+    comparar os multiplicadores de Rasmussen-Hirschman ES vs BR
+    setor a setor.
   \item \textbf{Campo de influência (Sonis-Hewings).} Mapear quais
     coeficientes técnicos $a_{ij}$ são mais críticos para a pegada
     agregada~\citep{sonis1992field}.
