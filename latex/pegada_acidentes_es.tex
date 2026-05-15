@@ -206,6 +206,36 @@ da pegada de acidentes para uma economia subnacional brasileira,
 usando a MIP-ES 2015 (35\,$\times$\,35) com vetor satélite construído
 diretamente dos registros administrativos oficiais do AEAT-2015.
 
+\paragraph{Dimensão estrutural e normativa.}
+A relevância do tema extrapola o caso capixaba. O Brasil registrou,
+em média, mais de 700~mil acidentes de trabalho anuais notificados no
+período 2010--2019 --- o que o torna uma das maiores economias do mundo
+em volume absoluto de acidentes ocupacionais~\citep{chagas2011saude}.
+Contudo, esse número subestima dramaticamente a realidade: a literatura
+estima taxas de subnotificação de cerca de 19\% a nível agregado
+nacional~\citep{inss2022subnotificacao} e de 50--70\% em setores com
+alta informalidade como construção, agropecuária e serviços
+domésticos~\citep{wunsch2004perfil,cordeiro2005underreporting}.
+Em uma economia exportadora de commodities como o Brasil --- e,
+em particular, o Espírito Santo --- a estrutura produtiva concentra
+fisicamente o risco nas atividades de extração e processamento,
+enquanto o benefício econômico é exportado. Essa assimetria é, ao
+mesmo tempo, estrutural e normativa.
+
+O problema da subnotificação não é ruído aleatório: é estruturalmente
+correlacionado com as dimensões de vulnerabilidade que mais importam
+para a análise --- setor produtivo, grau de informalidade, forma de
+inserção no mercado de trabalho. \citet{hitzig2020normative} denomina
+essa situação \textit{lacuna normativa} (\textit{normative gap}): a
+distância entre o que um sistema de mensuração foi desenhado para medir
+e o que o objetivo normativo da política pública exige que seja medido.
+No caso da CAT brasileira, o sistema foi desenhado para o universo de
+trabalhadores formais cobertos pelo RGPS; o objetivo normativo da
+Segurança e Saúde no Trabalho (SST) abrange a totalidade dos
+trabalhadores expostos ao risco. Essa lacuna é institucional,
+não acidental --- e tem implicações diretas para qualquer mensuração
+estrutural de acidentes via modelo insumo-produto.
+
 \paragraph{Originalidade.}
 Esta é a primeira aplicação de análise de pegada social voltada
 especificamente à variável \textit{acidentes de trabalho} em uma matriz
@@ -340,6 +370,46 @@ A combinação \textbf{alta $a_j$} e \textbf{alto $U_j^B$} caracteriza o
 que denominamos \textit{setores-chave de risco}: atividades cuja
 periculosidade própria é amplificada pelo seu papel a montante na cadeia.
 
+\subsection{Subnotificação como lacuna normativa}
+
+A categoria analítica central para interpretar as limitações do vetor
+satélite deste artigo é a de \textit{lacuna normativa}
+(\textit{normative gap}), conforme desenvolvida por
+\citet{hitzig2020normative} no campo do design de mecanismos. Uma
+lacuna normativa existe quando o critério de desempenho de um mecanismo
+diverge sistematicamente do critério normativo que fundamenta sua
+existência. No caso dos sistemas de notificação de acidentes de
+trabalho, o mecanismo --- a CAT vinculada ao RGPS --- otimiza para a
+população de trabalhadores formais com vínculo celetista, enquanto o
+objetivo normativo (proteção integral do trabalhador) abrange um
+universo substancialmente mais amplo.
+
+A literatura brasileira documenta essa lacuna com precisão crescente.
+\citet{chagas2011saude} estimam subnotificação agregada em torno de
+19\% para trabalhadores formais, com variação setorial pronunciada.
+\citet{wunsch2004perfil} demonstrou que na agropecuária --- setor com
+$a_j$ baixo em nosso modelo, mas com $\tilde{a}_j$ provavelmente
+elevado --- a subnotificação chega a dois terços dos eventos reais.
+\citet{cordeiro2005underreporting} confirmaram padrão semelhante em
+municípios de médio porte com base industrial diversificada.
+
+Para a análise de insumo-produto estendido, essa lacuna tem implicações
+diretas. O vetor $\mathbf{a}$ construído com dados do AEAT é um piso
+\textit{sistematicamente} enviesado, não um piso \textit{aleatório}:
+a subnotificação é positivamente correlacionada com informalidade e
+negativamente correlacionada com a capacidade institucional de
+notificação do setor. A análise Monte Carlo adotada
+($\sigma_{\log} = 0{,}20$) trata a incerteza como proporcional e
+independente entre setores --- o que é metodologicamente conservador
+mas normativamente ingênuo. A subnotificação real é setorialmente
+estruturada: setores como saúde privada (8692) e refino (1900) têm
+notificação fidedigna; setores como agropecuária (0191) e construção
+(4180) provavelmente possuem $a_j$ real substancialmente superior ao
+registrado. Essa assimetria comprime artificialmente o diferencial entre
+``setores seguros'' e ``setores perigosos'' na tipologia de quadrantes,
+ao mesmo tempo que sub-representa o passivo de acidentes dos
+trabalhadores mais vulneráveis da economia capixaba.
+
 % ════════════════════════════════════════════════════════════════
 \section{Dados e método}
 \label{sec:dados}
@@ -390,6 +460,26 @@ trabalhadores informais ($\approx 38\%$ da força de trabalho no ES em
 (setor 9700). Os resultados devem ser lidos como \textit{estimativa de
 piso (lower bound)} da pegada real de acidentes, com direção de
 enviesamento monotônica e efeito aproximadamente homotético sobre $a_j$.
+
+\paragraph{Subnotificação heterogênea e suas implicações.}
+A magnitude da subnotificação varia entre setores de forma sistemática,
+não aleatória. \citet{chagas2011saude} e \citet{wunsch2004perfil}
+estimam fator de subnotificação de 50--70\% em setores de alta
+informalidade (agropecuária, construção, serviços domésticos), contra
+cerca de 19\% para o agregado nacional~\citep{inss2022subnotificacao}.
+Essa heterogeneidade setorial tem consequência direta sobre a análise
+de quadrantes: setores como agropecuária (0191) e construção civil
+(4180) aparecem com $a_j$ baixo não porque são pouco perigosos, mas
+porque a subnotificação suprime o numerador. Na linguagem de
+\citet{hitzig2020normative}, o mecanismo CAT/RGPS produz uma
+\textit{lacuna normativa} que é amplamente setorialmente estruturada.
+A análise Monte Carlo com $\sigma_{\log}=0{,}20$ independente entre
+setores constitui, portanto, um limite inferior da incerteza real: uma
+perturbação metodologicamente mais precisa exigiria covariâncias
+positivas entre informalidade setorial e a magnitude do choque em
+$a_j$. A robustez a perturbações assimétricas setorialmente estruturadas
+permanece como extensão metodológica para trabalho futuro
+(Seção~\ref{sec:conclusao}).
 
 \subsection{Exercícios analíticos}
 
@@ -692,6 +782,39 @@ com $m^e_j$ alto e $\tilde{a}_j$ baixo (poucos acidentes por
 trabalhador, muitos trabalhadores por R\$~M) têm $a_j$ elevado por
 composição, não por periculosidade intrínseca.
 
+\paragraph{Terceiro deslocamento: normativo.}
+O padrão de deslocamento estrutural duplo descrito acima tem uma
+dimensão adicional, de natureza normativa. A própria mensuração dos
+acidentes de trabalho no Brasil está estruturada de modo a concentrar
+atenção regulatória em trabalhadores formais e a invisibilizar
+sistematicamente o risco suportado por informais, autônomos e
+estatutários. O AEAT registra as CATs dos trabalhadores cobertos pelo
+RGPS; os demais --- cerca de 40\% da força de trabalho nacional, e
+$\approx 38\%$ da capixaba em 2015 (PNAD-Contínua 4T/2015) --- não
+existem na estatística oficial de acidentes.
+
+Isso gera o que \citet{hitzig2020normative} denomina \textit{lacuna
+normativa}: uma divergência entre o critério de cobertura do sistema
+de informação (trabalhadores RGPS) e o critério normativo da política
+de SST (todos os trabalhadores em risco). Essa lacuna é especialmente
+relevante no contexto capixaba, onde os setores extrativos intensivos
+--- petróleo (0680) e minério de ferro (0791) --- combinam elevada
+exposição a risco, contratos de terceirização em cascata e presença de
+trabalhadores informais nos elos mais perigosos da cadeia.
+
+O resultado é uma inversão perversa: os trabalhadores que concentram
+maior risco real tendem a ser exatamente aqueles que menos contribuem
+para o numerador $e_j$ do vetor satélite $\mathbf{a}$. O deslocamento
+normativo amplifica os dois deslocamentos anteriores ao distribuir
+também o ônus regulatório de forma assimétrica: mais fiscalização para
+setores que notificam bem (saúde, refino), menos para os que notificam
+pouco (agropecuária, construção, terceirização informal). Sob essa
+perspectiva, a pegada calculada neste artigo é simultaneamente uma
+\textit{mensuração técnica do piso estruturado de risco} e um
+\textit{indicador da lacuna normativa} --- a distância entre o que o
+Estado vê e o que a estrutura produtiva efetivamente impõe aos
+trabalhadores.
+
 \paragraph{Implicação metodológica.}
 A tensão entre $a_j$ (normalização por VBP) e $\tilde{a}_j$
 (normalização por ocupações) é o trade-off central da literatura de
@@ -699,7 +822,8 @@ pegada social aplicada ao risco ocupacional. A normalização por VBP
 é necessária para a álgebra IO --- o modelo de Leontief é definido
 em termos de fluxos monetários. Mas a interpretação substantiva de
 quais setores são ``mais perigosos'' exige a análise conjunta das
-duas métricas.
+duas métricas, tendo como pano de fundo a estrutura setorial da
+subnotificação.
 
 \paragraph{Implicação política.}
 O padrão tem consequências para o desenho de políticas estaduais de
@@ -710,7 +834,11 @@ setores com alto encadeamento para trás (\textit{propagadores
 estruturais}) e os \textit{setores-chave de risco} identificados na
 análise de quadrantes são o ponto natural de uma política com alcance
 estrutural. A análise insumo-produto torna esse arranjo visível e
-mensurável.
+mensurável. Uma política de SST informada por esse quadro deveria,
+adicionalmente, corrigir a lacuna normativa: estimar o passivo real
+de acidentes com fatores setoriais de subnotificação e redistribuir
+atenção regulatória para os elos da cadeia onde o risco físico excede
+a visibilidade institucional.
 
 % ════════════════════════════════════════════════════════════════
 \section{Limitações}
@@ -760,6 +888,53 @@ capixaba, a propagação do passivo de acidentes ocorre via
 \textit{propagadores estruturais} e \textit{setores-chave de risco},
 que combinam alta intensidade com alto encadeamento para trás.
 
+\paragraph{Diretrizes de política pública.}
+Sob uma perspectiva estrutural-distributiva --- próxima à produzida
+pelo Centro de Pesquisa em Macroeconomia das Desigualdades (MADE/USP)
+e pelo programa de Saúde e Segurança no Trabalho do
+IPEA~\citep{chagas2011saude} --- os resultados deste artigo apontam
+para três diretrizes interligadas:
+
+\begin{enumerate}
+  \item \textbf{Reformulação do vetor de alocação da fiscalização.}
+    A política estadual de SST que usa taxas de incidência AEAT como
+    critério de alocação de auditores fiscais do trabalho replica
+    internamente a lacuna normativa: direciona mais atenção para
+    setores que já notificam mais. Uma política com alcance estrutural
+    exige estimativas setoriais corrigidas pela taxa de informalidade
+    (SmartLab/MTE) e pelo fator de subnotificação estimado para cada
+    CNAE~\citep{wunsch2004perfil,cordeiro2005underreporting}. O vetor
+    $\tilde{a}_j = e_j/\ell_j$ (CATs por trabalhador exposto) é um
+    primeiro passo; corrigido por fator de subnotificação, torna-se a
+    base de uma \textit{taxa de incidência real estimada} setorial.
+
+  \item \textbf{Responsabilidade regulatória por encadeamento.}
+    Os \textit{propagadores estruturais} identificados pela análise de
+    quadrantes --- setores com baixa intensidade direta mas alto
+    encadeamento para trás --- transmitem risco gerado a montante sem
+    serem o alvo natural da regulação. Um arcabouço de SST informado
+    pela análise IO permitiria: (a) exigir \textit{due diligence} de
+    SST na cadeia de fornecimento dos setores-chave de risco; (b)
+    rastrear o passivo de acidentes nos contratos de terceirização que
+    conectam propagadores estruturais a setores de alta intensidade.
+    Esse desenho é análogo ao que \citet{made2021multiplicadores}
+    propõem para políticas de renda: o multiplicador identifica onde
+    injetar o instrumento para maximizar o alcance sistêmico.
+
+  \item \textbf{Federalismo fiscal do risco ocupacional.}
+    O deslocamento geográfico identificado neste artigo revela uma
+    externalidade fiscal: o Espírito Santo suporta o ônus sanitário e
+    previdenciário do risco ocupacional dos setores extrativos (via
+    SUS, RGPS-Acidente do Trabalho, DPVAT e afastamentos), mas o
+    benefício econômico é capturado por exportadores e acionistas fora
+    do estado. O HEM quantifica essa assimetria: o petróleo e o minério
+    de ferro, com 17\% do VBP capixaba, respondem por menos de 3\% da
+    pegada estrutural de acidentes intra-estadual. Uma agenda de
+    equidade federativa em SST --- análoga ao debate sobre royalties
+    de recursos naturais --- encontra nessa assimetria sua
+    justificativa econômica mais precisa.
+\end{enumerate}
+
 \paragraph{Agenda de pesquisa futura.}
 Cinco extensões naturais ficam registradas:
 
@@ -776,8 +951,10 @@ Cinco extensões naturais ficam registradas:
   \item \textbf{Integração a matrizes mundiais.} Rastrear o destino
     internacional do passivo de SST embutido nas exportações capixabas
     via Eora MRIO ou WIOD.
-  \item \textbf{Extensão a outras dimensões de risco.} Adoecimento
-    mental (afastamentos CID-F), informalidade, automação.
+  \item \textbf{Subnotificação estruturada.} Desenvolver correção
+    setorial de $a_j$ com fatores estimados de subnotificação por
+    CNAE, avaliando o impacto da lacuna normativa sobre a tipologia
+    de quadrantes e o ranking HEM.
 \end{enumerate}
 
 \paragraph{Trajetória de publicação.}
@@ -817,8 +994,14 @@ Working paper, PPGEco/UFES.
 
 \bibitem[Chagas et al.(2011)]{chagas2011saude}
 Chagas, A. M. R., Salim, C. A., \& Servo, L. M. S. (Orgs.) (2011).
-\textit{Saúde e Segurança no Trabalho no Brasil}.
+\textit{Saúde e Segurança no Trabalho no Brasil: aspectos institucionais,
+sistemas de informação e indicadores}.
 Brasília: IPEA.
+
+\bibitem[Cordeiro et al.(2005)]{cordeiro2005underreporting}
+Cordeiro, R., Lima Filho, E. C., Dias, A., \& Gonçalves, C. B. M. (2005).
+Subnotificação de acidentes do trabalho não-fatais em Botucatu, São Paulo, Brasil.
+\textit{Cadernos de Saúde Pública}, 21(6), 1679--1686.
 
 \bibitem[Dietzenbacher \& Lahr(2013)]{dietzenbacher2013expanding}
 Dietzenbacher, E., \& Lahr, M. L. (2013).
@@ -830,6 +1013,11 @@ Guilhoto, J. J. M., \& Sesso Filho, U. A. (2010).
 Estimação da Matriz Insumo-Produto Utilizando Dados Preliminares.
 \textit{Economia \& Tecnologia}, 6(23).
 
+\bibitem[Hitzig(2020)]{hitzig2020normative}
+Hitzig, Z. (2020).
+The normative gap: mechanism design and the cooperative surplus.
+\textit{Economics \& Philosophy}, 36(2), 255--278.
+
 \bibitem[Hertwich \& Peters(2009)]{hertwich2009carbon}
 Hertwich, E. G., \& Peters, G. P. (2009).
 Carbon footprint of nations.
@@ -839,6 +1027,11 @@ Carbon footprint of nations.
 Hoekstra, A. Y., \& Hung, P. Q. (2002).
 Virtual water trade.
 \textit{Value of Water Research Report Series}, n.~11. UNESCO-IHE.
+
+\bibitem[INSS(2022)]{inss2022subnotificacao}
+Instituto Nacional do Seguro Social (2022).
+\textit{Anuário Estatístico da Previdência Social 2022}.
+Brasília: INSS/MTP/Dataprev.
 
 \bibitem[IPEA(2010)]{ipea2010mipregional}
 Instituto de Pesquisa Econômica Aplicada (2010).
@@ -879,6 +1072,11 @@ Decomposição estrutural do emprego por grau de instrução.
 Rasmussen, P. N. (1956).
 \textit{Studies in Inter-Sectoral Relations}.
 Amsterdam: North-Holland.
+
+\bibitem[Wünsch Filho(2004)]{wunsch2004perfil}
+Wünsch Filho, V. (2004).
+Perfil epidemiológico dos trabalhadores.
+\textit{Revista Brasileira de Medicina do Trabalho}, 2(2), 103--117.
 
 \bibitem[Shimizu et al.(2021)]{shimizu2021accident}
 Shimizu, H. E., et al. (2021).
