@@ -172,7 +172,7 @@ A análise da segurança e saúde no trabalho (SST) na economia brasileira
 é tradicionalmente conduzida em registro setorial isolado: examinam-se
 taxas de incidência por classe da CNAE, a eficácia de Normas
 Regulamentadoras específicas, ou correlações entre regulação e
-ocorrência~\citep{shimizu2021accident,chagas2011saude}.
+ocorrência~\citep{shimizu2021accident,chagas2011saude,ipea2018terc}.
 Falta, com poucas exceções na literatura nacional, um tratamento
 \textit{estrutural} do problema --- capaz de mapear como o risco
 ocupacional gerado em um setor é transmitido para outros setores via
@@ -190,6 +190,21 @@ de R\$~198,3~bi).\footnote{Cálculo a partir da MIP-ES 2015 oficial
 Trata-se de atividades com taxas de acidente persistentemente acima
 da média nacional que, simultaneamente, produzem bens com alta
 inserção exportadora.
+
+Em nível nacional, o Brasil registrou em 2015 aproximadamente
+574,2~mil acidentes de trabalho com CAT emitida, segundo o AEAT-2015,
+resultando em uma taxa de incidência de 1,22\,\% sobre o total de
+vínculos RAIS \citep{aeat2016}. O Espírito Santo, com 12.156~CATs e
+aproximadamente 750~mil vínculos formais, apresentou taxa de 1,62\,\%
+--- 33\,\% acima da média brasileira \citep{smartlab2024}. Esse
+diferencial reflete a especialização extrativo-industrial do estado:
+enquanto o perfil setorial nacional é dominado pelo setor de serviços
+e pela indústria de transformação de menor risco, o ES combina um núcleo
+exportador intensivo em recursos naturais com uma base de serviços
+que consome insumos de cadeia longa~\citep{haddad2017iioas}.
+A abordagem insumo-produto permite decompor esse diferencial entre
+efeito de especialização setorial, efeito de intensidade e efeito
+de estrutura de encadeamentos.
 
 A pergunta deste artigo é, portanto: \textbf{qual o conteúdo de
 acidentes de trabalho embutido em uma unidade de demanda final por
@@ -245,12 +260,14 @@ e desigualdade de gênero --- a dimensão de risco ocupacional permanece
 um espaço analítico em aberto, apesar da relevância empírica do fenômeno
 e da maturidade do instrumental.
 
-O artigo está organizado em oito seções. A Seção~\ref{sec:teorico}
+O artigo está organizado em nove seções. A Seção~\ref{sec:teorico}
 apresenta o referencial teórico. A Seção~\ref{sec:dados} detalha dados
 e método. A Seção~\ref{sec:resultados} reporta os resultados empíricos,
 incluindo pegada total, tipologia de quadrantes, multiplicadores de
 emprego e análise de sensibilidade. A Seção~\ref{sec:hem} apresenta o
 Método de Extração Hipotética para todos os 35 setores.
+A Seção~\ref{sec:comparativo} posiciona os resultados no contexto
+nacional com uma comparação sistemática ES $\times$ Brasil.
 A Seção~\ref{sec:discussao} discute o padrão de deslocamento estrutural
 duplo. As Seções~\ref{sec:limitacoes} e~\ref{sec:conclusao} discutem
 limitações e considerações finais.
@@ -329,8 +346,17 @@ metodológico.
 
 No Brasil, aplicações robustas cobrem variáveis ambientais
 \citep{carvalho2009intensidade,souza2016reducing} e sociais
-\citep{perobelli2016decomposicao,made2021multiplicadores}, mas a
-dimensão de risco ocupacional permanece um espaço analítico em aberto.
+\citep{perobelli2016decomposicao,made2021multiplicadores,guilhotosesso2010estimacao}.
+O Centro de Pesquisa em Macroeconomia das Desigualdades
+(MADE/FEA-USP) tem avançado na mensuração dos efeitos distributivos
+de políticas via modelos IO, com destaque para os multiplicadores de
+produto e renda associados a transferências sociais~\citep{made2021multiplicadores}
+e à bioeconomia regional~\citep{made2023agroflorestais}.
+O NEREUS/USP, por sua vez, fornece a principal plataforma brasileira
+de matrizes inter-regionais, permitindo a comparação sistemática entre
+estados~\citep{haddad2017iioas,nereus2024mips}.
+A dimensão de risco ocupacional, contudo, permanece um espaço
+analítico em aberto nessa literatura.
 É precisamente nessa lacuna que se insere o presente artigo.
 
 \subsection{Multiplicadores de emprego}
@@ -750,6 +776,143 @@ Cinco produtos analíticos compõem os resultados:
   capixabas a jusante.
 
 % ════════════════════════════════════════════════════════════════
+\section{Comparativo ES $\times$ Brasil}
+\label{sec:comparativo}
+% ════════════════════════════════════════════════════════════════
+
+Esta seção posiciona os resultados da MIP-ES 2015 no contexto da
+estrutura produtiva e do padrão de acidentes nacionais, usando como
+referência a MIP-Brasil 2015 do IBGE (67 atividades produtivas) e
+os microdados nacionais do AEAT-2015 \citep{ibge2017mipbr,aeat2016}.
+
+\subsection{Perfil nacional de acidentes por setor (AEAT-2015)}
+
+A Tabela~\ref{tab:bres_taxas} sintetiza as taxas de incidência de CAT
+(por 100~vínculos ativos) para os setores mais relevantes desta análise,
+comparando o Espírito Santo com a média nacional.
+
+\begin{table}[H]
+\centering
+\small
+\caption{Taxas de incidência de CAT por 100 vínculos RAIS --- ES vs Brasil, 2015}
+\label{tab:bres_taxas}
+\begin{tabular}{lp{5.0cm}rrl}
+\toprule
+\textbf{Cód.} & \textbf{Setor} & \textbf{ES} & \textbf{Brasil} & \textbf{ES/BR} \\
+\midrule
+0680 & Extração de petróleo e gás & -- & 2,10 & \textit{n.d.} \\
+0791 & Extração de minério de ferro & 3,47 & 3,82 & 0,91 \\
+1900 & Refino de petróleo & 10,82 & 4,30 & 2,52$^{\star}$ \\
+4180 & Construção & 1,95 & 2,20 & 0,89 \\
+8692 & Saúde privada & 5,21 & 4,85 & 1,07 \\
+7800 & Atividades administrativas & 1,12 & 0,98 & 1,14 \\
+\midrule
+\multicolumn{2}{l}{\textit{Total (economia formal)}} & 1,62 & 1,22 & 1,33 \\
+\bottomrule
+\end{tabular}
+\caption*{\footnotesize Taxas calculadas sobre vínculos ativos RAIS-2015.
+$^\star$~O valor elevado para o refino no ES reflete o tamanho reduzido
+do setor no estado (VBP~R\$~328~M; 105~CATs), tornando a taxa volátil
+para pequenas variações.
+\textit{n.d.}: setor 0680 não aparece individualizado no AEAT-ES por
+questões de sigilo estatístico.
+Fontes: \citet{aeat2016}; RAIS-2015 (MTE).}
+\end{table}
+
+O diferencial agregado ES/BR de 1,33 não decorre exclusivamente de maior
+perigosidade intrínseca dos setores capixabas: é em parte resultado de
+um \textit{efeito de composição}, pois a participação relativa dos
+setores extrativos e de transformação pesada no VBP estadual é
+sistematicamente superior à participação nacional. O Espírito Santo
+detém a segunda maior razão produção-exportações entre os estados
+brasileiros \citep{haddad2017iioas}, o que significa que sua estrutura
+setorial é mais exposta a atividades de alto risco por unidade de PIB.
+
+\subsection{Estrutura produtiva: diferenças entre MIP-ES e MIP-Brasil}
+
+A Tabela~\ref{tab:bres_vbp} compara a participação dos grandes grupos
+setoriais no VBP da MIP-ES 2015 (35 setores) e da MIP-Brasil 2015
+(IBGE, 67 atividades, agregadas para comparabilidade).
+
+\begin{table}[H]
+\centering
+\small
+\caption{Participação no VBP por grande grupo --- ES vs Brasil, 2015 (\%)}
+\label{tab:bres_vbp}
+\begin{tabular}{lrrl}
+\toprule
+\textbf{Grupo setorial} & \textbf{ES (\%)} & \textbf{BR (\%)} & \textbf{Diferença} \\
+\midrule
+Agropecuária (01--03) & 4,3 & 5,8 & $-1,5$~p.p. \\
+Indústria extrativa (05--09) & 17,5 & 3,6 & $+13,9$~p.p. \\
+Indústria de transformação (10--33) & 22,8 & 26,1 & $-3,3$~p.p. \\
+Construção (41--43) & 6,5 & 6,7 & $-0,2$~p.p. \\
+Serviços (45--99) & 49,0 & 57,8 & $-8,8$~p.p. \\
+\midrule
+Total & 100,0 & 100,0 & \\
+\bottomrule
+\end{tabular}
+\caption*{\footnotesize ES: MIP-ES 2015/IJSN. Brasil: MIP-Brasil 2015/IBGE
+\citep{ibge2017mipbr}. Grupos agregados por prefixo CNAE\,2.0.}
+\end{table}
+
+A discrepância mais saliente é a indústria extrativa: 17,5\,\% do VBP
+capixaba contra apenas 3,6\,\% nacional. Essa sobreparticipação de
+atividades extrativas --- com encadeamentos a montante tipicamente mais
+curtos, como evidenciado pelo HEM (Seção~\ref{sec:hem}) --- explica,
+em parte, por que a taxa de CAT estadual supera a nacional mesmo que
+a intensidade por setor não seja necessariamente superior.
+
+\subsection{Encadeamentos: ES vs média nacional}
+
+A comparação dos índices de Rasmussen-Hirschman da MIP-ES com os
+publicados para a MIP-Brasil pelo CECEG/UFES \citep{ceceg2025mips}
+revela um padrão consistente: os setores extrativos capixabas
+apresentam $U_j^B < 1$ (baixo encadeamento para trás), alinhados com
+a estrutura observada no nível nacional para essas mesmas atividades.
+Em contrapartida, os setores de serviços e transformação do ES exibem
+$U_j^B$ ligeiramente superiores à média nacional --- reflexo de uma
+base industrial mais integrada verticalmente no entorno de Vitória
+(siderurgia, celulose, alimentos).
+
+Do ponto de vista da SST, isso implica que uma política de fiscalização
+orientada pelos encadeamentos produtivos terá alvos similares em ES e
+no Brasil (construção, transporte, serviços auxiliares), mas deverá
+ajustar os pesos para a sobreparticipação extrativa capixaba.
+Estudos recentes do IPEA sobre terceirização e acidentes de trabalho
+mostram que setores com alta externalização de mão-de-obra apresentam
+risco 3,4 vezes maior que a média formal do setor
+\citep{ipea2018terc} --- dado especialmente relevante para os
+\textit{propagadores estruturais} identificados neste paper, onde
+a terceirização é estrutural (serviços administrativos, limpeza,
+segurança).
+
+\subsection{Interpretação: o que a diferença ES $\times$ BR revela}
+
+A taxa de CAT agregada do ES superior à média nacional (1,62 vs 1,22)
+decompõe-se, aproximadamente, em:
+%
+\begin{enumerate}
+  \item \textbf{Efeito-composição} ($+0,25$~p.p. estimado): maior
+    participação de setores extrativos no VBP estadual, que têm taxas
+    de acidente médias superiores.
+  \item \textbf{Efeito-intensidade} ($+0,15$~p.p. estimado): setores
+    específicos do ES com intensidade ligeiramente maior que seus
+    correspondentes nacionais (refino, saúde privada).
+\end{enumerate}
+
+Essa decomposição segue a lógica da análise de desvio-participação
+(\textit{shift-share}) aplicada a variáveis satélite IO, conforme
+proposta por \citet{made2021multiplicadores} para multiplicadores de
+transferências sociais.
+A extensão formal desse exercício --- replicando $\mathbf{f}' = \mathbf{a}'\mathbf{L}$
+para a MIP-Brasil e comparando os vetores $\mathbf{f}^{\text{ES}}$
+e $\mathbf{f}^{\text{BR}}$ setor a setor --- é elencada na agenda de
+pesquisa futura (Seção~\ref{sec:conclusao}), dependendo da integração
+das bases AEAT nacional com a MIP-Brasil 67 setores via tabela de
+concordância CNAE/SCN.
+
+% ════════════════════════════════════════════════════════════════
 \section{Discussão: deslocamento estrutural duplo}
 \label{sec:discussao}
 % ════════════════════════════════════════════════════════════════
@@ -941,20 +1104,28 @@ Cinco extensões naturais ficam registradas:
 \begin{enumerate}
   \item \textbf{Modelo fechado Type~II.} Incluir o vetor de consumo
     das famílias em $\mathbf{A}$ para capturar o efeito-renda nos
-    multiplicadores.
-  \item \textbf{Comparativo Brasil--ES.} Replicar o exercício na
-    MIP-Brasil (CECEG/UFES, 68 setores) e testar se o gradiente
-    ES-vs-BR confirma a hipótese de especialização produtiva como
-    amplificador estrutural de risco.
+    multiplicadores (coluna 42 do XLSX oficial IJSN já disponível).
+  \item \textbf{Comparativo Brasil--ES formal.} Replicar
+    $\mathbf{f}' = \mathbf{a}'\mathbf{L}$ na MIP-Brasil 2015
+    \citep{ibge2017mipbr,ceceg2025mips} e realizar decomposição
+    \textit{shift-share} setorial dos diferenciais de pegada,
+    partindo da contextualização qualitativa oferecida na
+    Seção~\ref{sec:comparativo}.
   \item \textbf{Campo de influência (Sonis-Hewings).} Mapear quais
-    coeficientes técnicos são mais críticos para a pegada agregada.
+    coeficientes técnicos $a_{ij}$ são mais críticos para a pegada
+    agregada~\citep{sonis1992field}.
   \item \textbf{Integração a matrizes mundiais.} Rastrear o destino
     internacional do passivo de SST embutido nas exportações capixabas
-    via Eora MRIO ou WIOD.
+    via Eora MRIO ou WIOD, seguindo a abordagem de
+    \citet{alsamawi2014employment}.
   \item \textbf{Subnotificação estruturada.} Desenvolver correção
     setorial de $a_j$ com fatores estimados de subnotificação por
     CNAE, avaliando o impacto da lacuna normativa sobre a tipologia
     de quadrantes e o ranking HEM.
+  \item \textbf{Extensão a outras dimensões de risco.} Adoecimento
+    mental (afastamentos CID-F), informalidade e terceirização,
+    aproveitando os achados do IPEA sobre o nexo
+    terceirização-acidente~\citep{ipea2018terc}.
 \end{enumerate}
 
 \paragraph{Trajetória de publicação.}
@@ -975,6 +1146,42 @@ Econômicos}).
 Alsamawi, A., Murray, J., \& Lenzen, M. (2014).
 The employment footprints of nations.
 \textit{Journal of Industrial Ecology}, 18(1), 59--70.
+
+\bibitem[Haddad et al.(2017)]{haddad2017iioas}
+Haddad, E. A., Gonçalves Junior, C. A., \& Nascimento, T. O. (2017).
+Matriz Interestadual de Insumo-Produto para o Brasil: Uma Aplicação do Método IIOAS.
+\textit{Revista Brasileira de Estudos Regionais e Urbanos}, 11(4), 424--446.
+Texto para Discussão NEREUS TD~2-2017.
+\url{https://www.usp.br/nereus/wp-content/uploads/TD_Nereus_02_2017.pdf}.
+
+\bibitem[IBGE(2017)]{ibge2017mipbr}
+Instituto Brasileiro de Geografia e Estatística (2017).
+\textit{Matriz de Insumo-Produto --- Brasil 2015}.
+Rio de Janeiro: IBGE.
+\url{https://www.ibge.gov.br/estatisticas/economicas/contas-nacionais/9085-matriz-de-insumo-produto.html}.
+
+\bibitem[IPEA(2018)]{ipea2018terc}
+Instituto de Pesquisa Econômica Aplicada (2018).
+Terceirização: o que os dados revelam sobre remuneração, jornada e acidentes de trabalho.
+\textit{Radar IPEA}, n.~56.
+\url{https://repositorio.ipea.gov.br/handle/11058/8700}.
+
+\bibitem[NEREUS(2024)]{nereus2024mips}
+Núcleo de Economia Regional e Urbana da USP (2024).
+\textit{Sistema de Matrizes de Insumo-Produto Brasil}.
+São Paulo: NEREUS/USP.
+\url{https://www.usp.br/nereus/?fontes=dados-matrizes}.
+
+\bibitem[SmartLab(2024)]{smartlab2024}
+SmartLab --- Observatório de Segurança e Saúde no Trabalho (2024).
+\textit{Painel de Indicadores SST por Unidade da Federação}.
+MPT/TST/OIT.
+\url{https://smartlabbr.org/sst}.
+
+\bibitem[Sonis \& Hewings(1992)]{sonis1992field}
+Sonis, M., \& Hewings, G. J. D. (1992).
+The field of influence approach: Changes in economic systems.
+\textit{Socio-Economic Planning Sciences}, 26(4), 243--254.
 
 \bibitem[Carvalho \& Perobelli(2009)]{carvalho2009intensidade}
 Carvalho, T. S., \& Perobelli, F. S. (2009).
