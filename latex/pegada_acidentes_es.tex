@@ -1134,6 +1134,137 @@ das contas nacionais. O setor 0680, por exemplo, agrega operações
 (risco menor), sub-representando contrastes relevantes.
 
 % ════════════════════════════════════════════════════════════════
+\section{Dimensão distributiva: gênero e vulnerabilidade socioeconômica}
+\label{sec:distributivo}
+% ════════════════════════════════════════════════════════════════
+
+\subsection{Pegada de acidentes por gênero}
+\label{subsec:genero}
+
+Seguindo a metodologia de \citet{made2025carbono} --- que decompõe a
+pegada de carbono por gênero e classe de renda via extensão social
+do modelo IO --- decompomos a intensidade setorial $a_j$ segundo a
+participação feminina no emprego formal $\phi_j^F$ (RAIS-ES 2015):
+
+\begin{equation}
+  a_j^g = a_j \times \phi_j^g, \quad g \in \{F, M\},
+  \label{eq:agenero}
+\end{equation}
+
+e a pegada correspondente:
+
+\begin{equation}
+  \mathbf{f}^{g\prime} = \mathbf{a}^{g\prime} \mathbf{L}^{\text{ES}}.
+  \label{eq:fgenero}
+\end{equation}
+
+Os resultados mostram forte assimetria de gênero: a pegada feminina
+agregada é $\bar{f}^F = 0{,}035$ CATs/R\$M, contra $\bar{f}^M = 0{,}057$
+CATs/R\$M para os homens (razão $F/M = 0{,}62$). As mulheres representam
+32,2\% do emprego formal capixaba, mas apenas 38,2\% da pegada total ---
+isto é, o risco por unidade de emprego é proporcionalmente menor para
+as trabalhadoras. O paradoxo emerge nos setores de \textit{serviços com
+alta feminização e alta intensidade}, como saúde privada (setor 8692,
+$\phi_j^F = 78\%$) e educação privada (8592, $\phi_j^F = 72\%$), onde
+as mulheres carregam a maior parcela absoluta da pegada feminina.
+
+\subsection{Vulnerabilidade socioeconômica por setor}
+\label{subsec:vulnerabilidade}
+
+Para além da dimensão de gênero, cruzamos a pegada de acidentes com o
+\textbf{Índice de Vulnerabilidade Multidimensional Não-Monetário (IVM-NM)}
+da POF 2017-2018 (IBGE). O IVM-NM captura privações em educação, saúde,
+trabalho, habitação e segurança alimentar, ignoradas pela abordagem de
+renda exclusivamente monetária.
+
+Para cada setor $j$, calculamos a vulnerabilidade média dos trabalhadores:
+
+\begin{equation}
+  V_j = \sum_{k} w_{jk} \times \text{IVM}_k,
+  \label{eq:vj}
+\end{equation}
+
+onde $k$ indexa classes ocupacionais (empregado privado, conta própria,
+empregado doméstico, militar/público, empregador), $w_{jk}$ é a fração
+de trabalhadores do setor $j$ na classe $k$ (proxy RAIS-ES/PNAD-C), e
+$\text{IVM}_k$ é o índice da POF 2017-2018 (Tabela~1b). Os valores são:
+empregado privado~=~6,17; conta própria~=~9,39; empregado
+doméstico~=~11,36; militar/público~=~4,13; empregador~=~2,82.
+
+\paragraph{Indicador composto.} Definimos:
+
+\begin{equation}
+  C_j = f_j \times V_j,
+  \label{eq:cj}
+\end{equation}
+
+que identifica setores onde alto risco de acidente \textit{coincide} com
+alta vulnerabilidade socioeconômica dos trabalhadores atingidos.
+
+\paragraph{Resultados dos setores extrativistas.}
+Os três setores extrativistas chave apresentam padrão revelador
+(Tabela~\ref{tab:extrativistas_distrib}):
+
+\begin{table}[H]
+\centering
+\caption{Indicadores distributivos dos setores extrativistas --- ES 2015}
+\label{tab:extrativistas_distrib}
+\begin{threeparttable}
+\small
+\begin{tabular}{@{}L{4.2cm}ccccc@{}}
+\toprule
+Setor & $a_j$ & $f_j$ & $V_j$ & $C_j$ & $C_j/\bar{C}$ \\
+\midrule
+Extração mineral (0580)   & 0,109 & 0,127 & 6,33 & 0,806 & 1,02 \\
+Petróleo e gás (0680)     & 0,005 & 0,040 & 6,16 & 0,245 & 0,31 \\
+Minério de ferro (0791)   & 0,011 & 0,078 & 6,33 & 0,494 & 0,62 \\
+\midrule
+Média da economia          & 0,079 & 0,114 & 6,63 & 0,790 & 1,00 \\
+\bottomrule
+\end{tabular}
+\begin{tablenotes}
+\small
+\item \textit{Nota}: $a_j$: intensidade direta (CATs/R\$M VBP);
+$f_j$: pegada IO (CATs/R\$M demanda final); $V_j$: vulnerabilidade
+média dos trabalhadores (IVM-NM, POF 2017-2018); $C_j = f_j \times V_j$.
+Os perfis ocupacionais $w_{jk}$ são proxies baseadas em RAIS-ES 2015
+e PNAD-C --- sujeitos a revisão com microdados.
+\end{tablenotes}
+\end{threeparttable}
+\end{table}
+
+O dado central deste cruzamento é que os setores extrativistas possuem
+vulnerabilidade setorial $V_j$ levemente \textit{abaixo} da média da
+economia. Isso decorre da alta formalização do emprego nesses setores:
+com 85--88\% de empregados privados formais, os trabalhadores da
+mineração e do petróleo têm acesso a proteção previdenciária e de saúde
+superiores aos de setores com alta conta-própria (construção, transporte)
+ou serviços domésticos. Esse resultado é coerente com o IVM-NM por
+décimo de renda da POF: o 1\textordmasculine{} décimo (17,95) tem
+vulnerabilidade 22 vezes maior que o 10\textordmasculine{} (0,83),
+e trabalhadores extrativistas formais tendem a concentrar-se nos
+décimos medianos.
+
+O indicador composto $C_j$ revela, em contrapartida, que \textbf{saúde
+privada} (8692), \textbf{refino de petróleo} (1900) e \textbf{madeira
+e móveis} (1600) lideram o ranking: são setores onde alta pegada $f_j$
+coincide com vulnerabilidade superior à média. Construção (4180,
+$V_j = 7{,}13$, devido à alta conta-própria informal) e transportes
+(4900, $V_j = 7{,}09$) também aparecem em posição destacada, revelando
+que o ônus estrutural dos acidentes recai mais fortemente sobre
+trabalhadores em condições de maior precariedade.
+
+\paragraph{Implicações analíticas.}
+A combinação da pegada de gênero (Subseção~\ref{subsec:genero}) com o
+indicador composto $C_j$ sugere três grupos de política diferenciada:
+(i)~setores com alta pegada masculina e alta vulnerabilidade
+(construção, transporte): foco em formalização e SST estrutural;
+(ii)~setores com alta pegada feminina e vulnerabilidade média (saúde
+privada, educação privada): foco em nexo causal feminino e carga mental;
+(iii)~setores extrativistas com pegada moderada e formalização elevada:
+foco no passivo previdenciário e no risco exportado via cadeia produtiva.
+
+% ════════════════════════════════════════════════════════════════
 \section{Considerações finais}
 \label{sec:conclusao}
 % ════════════════════════════════════════════════════════════════
@@ -1231,6 +1362,17 @@ Cinco extensões naturais ficam registradas:
     mental (afastamentos CID-F), informalidade e terceirização,
     aproveitando os achados do IPEA sobre o nexo
     terceirização-acidente~\citep{ipea2018terc}.
+  \item \textbf{Demanda final por decil de renda (Bloco~B).} Com os
+    microdados da POF 2017-2018 e uma matriz-ponte COICOP~$\to$~MIP-ES,
+    calcular a pegada de acidentes gerada por cada décimo de renda
+    ($F^d = \mathbf{f}' \mathbf{B} \mathbf{c}^d$), respondendo à
+    pergunta: qual classe de renda demanda mais risco de acidente via
+    seu padrão de consumo?
+  \item \textbf{Refinamento do perfil ocupacional setorial.}
+    Os pesos $w_{jk}$ na equação~\eqref{eq:vj} atualmente são proxies
+    baseadas em RAIS-ES agregada e PNAD-C; microdados RAIS-ES por CNAE
+    a 4 dígitos permitiriam estimativas diretas de $w_{jk}$ para cada
+    setor MIP-ES.
 \end{enumerate}
 
 \paragraph{Trajetória de publicação.}
@@ -1359,6 +1501,12 @@ Environmental repercussions and the economic structure.
 Made/FEA-USP \& OIT (2021).
 \textit{Multiplicadores de produto, consumo e investimento de transferências sociais no Brasil}.
 Notas de Política Econômica, Made-USP.
+
+\bibitem[Made-USP(2025)]{made2025carbono}
+Made/FEA-USP (2025).
+Pegada de Carbono e Distribuição de Renda: quem paga a conta das emissões brasileiras?
+Notas de Política Econômica, n.~76. Made-USP.
+\url{https://madeusp.com.br/wp-content/uploads/2025/08/npe76-pegadadecarbono-1.pdf}.
 
 \bibitem[Made-USP(2023)]{made2023agroflorestais}
 Made/FEA-USP (2023).
