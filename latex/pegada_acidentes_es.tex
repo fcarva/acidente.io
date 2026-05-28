@@ -466,8 +466,8 @@ $\|(\mathbf{I}-\mathbf{A})\mathbf{L} - \mathbf{I}\|_F = 2{,}06 \times 10^{-15}$
 
 Para a análise do multiplicador de emprego, utiliza-se o vetor de
 ocupações formais por setor extraído da RAIS-2015 (Ministério do
-Trabalho), compatibilizado com a classificação setorial da MIP-ES via
-tabela de tradutores CNAE\,2.0/SCN-IBGE.
+Trabalho)~\citep{corseuil2026rais}, compatibilizado com a classificação
+setorial da MIP-ES via tabela de tradutores CNAE\,2.0/SCN-IBGE.
 
 \subsection{Vetor satélite de acidentes}
 
@@ -496,7 +496,7 @@ trabalhadores informais ($\approx 38\%$ da força de trabalho no ES em
 2015, PNAD-Contínua 4T/2015) e empregados domésticos sem CAT registrada
 (setor 9700). Os resultados devem ser lidos como \textit{estimativa de
 piso (lower bound)} da pegada real de acidentes, com direção de
-enviesamento monotônica e efeito aproximadamente homotético sobre $a_j$.
+enviesamento monotônica e efeito aproximadamente homotético sobre $a_j$.\footnote{A partir de 2021, CAT e Rais passaram a compartilhar a infraestrutura do eSocial, possibilitando linkagem por CNPJ/CNAE; o cronograma de adesão à Fase~4 (saúde e segurança do trabalho) estendeu-se de outubro de 2021 (Grupo~1, faturamento $>$ R\$~78mi) até janeiro de 2023 (setor público)~\citep[cap.~6]{corseuil2026rais}. Os dados aqui utilizados (2015) são pré-migração --- a compatibilização CAT/RAIS é feita no nível setorial CNAE/MIP.}
 
 \paragraph{Subnotificação heterogênea e suas implicações.}
 A magnitude da subnotificação varia entre setores de forma sistemática,
@@ -1116,7 +1116,10 @@ Quatro limitações merecem registro explícito.
 \textbf{Primeiro}, o AEAT cobre apenas trabalhadores vinculados ao RGPS.
 Servidores estatutários (setores 8400, 8591, 8691), trabalhadores
 informais ($\approx 38\%$ da força capixaba) e domésticos sem CAT
-não estão capturados. A análise Monte Carlo (Seção~\ref{sec:resultados})
+não estão capturados. Para uma análise das divergências sistemáticas
+entre cobertura RAIS e PNAD-Contínua e suas implicações para a
+mensuração da formalidade setorial, ver \citet[cap.~4]{corseuil2026rais}.
+A análise Monte Carlo (Seção~\ref{sec:resultados})
 mostra que perturbações de até $\pm 20\%$ em $a_j$ não alteram
 substancialmente a classificação dos setores robustos.
 
@@ -1384,6 +1387,11 @@ Decomposição estrutural do emprego por grau de instrução.
 Rasmussen, P. N. (1956).
 \textit{Studies in Inter-Sectoral Relations}.
 Amsterdam: North-Holland.
+
+\bibitem[Corseuil et al.(2026)]{corseuil2026rais}
+Corseuil, C. H., Mation, L., \& Pateo, F. V. (Orgs.) (2026).
+\textit{A trajetória do emprego no Brasil: 50 anos de estatísticas por meio da Rais}.
+Brasília: Ipea/MTE. 208p.
 
 \bibitem[Wünsch Filho(2004)]{wunsch2004perfil}
 Wünsch Filho, V. (2004).
